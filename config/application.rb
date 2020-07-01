@@ -30,6 +30,9 @@ module InstaClone
     # Don't generate system test files.
     config.generators.system_tests = nil
 
+    # 自動生成されるファイルをerbからslim形式に変更
+    config.generators.template_engine = :slim
+
     # 国際化対応
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
