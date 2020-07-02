@@ -1,1 +1,19 @@
 @import 'bootstrap-material-design/dist/css/bootstrap-material-design';
+
+body {
+  position: relative;
+  height: 100vh;
+}
+
+.login-register-form {
+  position: relative;
+  height: 100vh;
+
+  .login-register-form-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+  }
+}
