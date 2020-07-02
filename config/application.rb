@@ -41,10 +41,9 @@ module InstaClone
 
     # generateコマンド時に生成されるファイルに制限をかける
     config.generators do |g|
-      g.assets  false # CSS, JSが自動生成されない
-      g.test_framework  false # Minitestが自動生成されない
-      g.skip_routes  true # ルーティングが自動生成されない
+      g.assets false # CSS, JSが自動生成されない
+      g.test_framework false # Minitestが自動生成されない
+      g.skip_routes true # ルーティングが自動生成されない
     end
-
   end
 end
