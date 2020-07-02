@@ -59,5 +59,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # session管理にredisを使う
+  # session期限を1日とする
   config.session_store :redis_store, servers: 'redis://localhost:6379', expire_after: 1.day
 end

@@ -9,6 +9,11 @@
 # And be sure to use new-style password hashing:
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
+# Rails5.2の場合、あまりcredentialsは開発環境において使うものではないらしいが、練習がてら使ってみた。
+# Rails6.0の場合、credentialsは環境ごとに分けて使えるらしい。
+#（本番環境用においては、envの環境変数を使う設定を残しているので、どっちかにしたらと言われそう）
+# このあたりはまだ勉強中なので、よく分かっていないです。gemを使う方法もあるみたいですね。。。
+#
 default: &default
   adapter: mysql2
   encoding: utf8
