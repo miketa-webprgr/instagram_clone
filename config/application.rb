@@ -1,16 +1,16 @@
 require_relative 'boot'
 
-require "rails"
+require 'rails'
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "active_job/railtie"
-require "active_record/railtie"
-require "active_storage/engine"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "action_cable/engine"
-require "sprockets/railtie"
+require 'active_model/railtie'
+require 'active_job/railtie'
+require 'active_record/railtie'
+require 'active_storage/engine'
+require 'action_controller/railtie'
+require 'action_mailer/railtie'
+require 'action_view/railtie'
+require 'action_cable/engine'
+require 'sprockets/railtie'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -29,5 +29,21 @@ module InstaClone
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # 自動生成されるファイルをerbからslim形式に変更
+    config.generators.template_engine = :slim
+
+    # 国際化対応
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+    config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+
+    # generateコマンド時に生成されるファイルに制限をかける
+    config.generators do |g|
+      g.assets false # CSS, JSが自動生成されない
+      g.test_framework false # Minitestが自動生成されない
+      g.skip_routes true # ルーティングが自動生成されない
+    end
   end
 end
