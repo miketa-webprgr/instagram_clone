@@ -18,4 +18,13 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
+  mount_uploaders :images, ImageUploader
+  # Rails5.0未満を使ってる場合は以下のコードも必要とのこと
+  # なので、試しにコメントアウトしていても問題がないか実験してみる
+  # serialize :images, JSON
+  
+  validates :body, presence: true, length: { maximum: 1000 }
+  validates :images, presence: true  
+
+  belongs_to :user 
 end
