@@ -130,3 +130,6 @@ Temporary Items
 
 # Local History for Visual Studio Code
 .history/
+
+# シードファイル（画像）
+/public/uploads
