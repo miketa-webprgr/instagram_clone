@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  root 'posts#index'
+  # ログインしてる時、ルートパスは'posts#index'とする（一覧画面に遷移）
+  constraints ->  request { request.session[:user_id].present? } do
+    root 'posts#index'
+  end
+  # ログインしてない時、ルートパスは'user_sessions#new'とする（ログイン画面に遷移）
+  root 'user_sessions#new'
 
   resources :users, only: %i[new create]
   resources :posts
