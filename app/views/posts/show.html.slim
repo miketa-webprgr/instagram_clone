@@ -1,0 +1,54 @@
+.post-detail.card
+  .image-box
+    .swiper-container
+      .swiper-wrapper
+        - @post.images.each do |image|
+          .swiper-slide
+            /image_tagを使うと、画像を簡単に配置できる
+            /urlメソッドはcarrierwaveのメソッド
+            /https://github.com/carrierwaveuploader/carrierwave#activerecord
+            = image_tag image.url
+      .swiper-pagination
+      / せっかくなので、3D Flip Effectを試しに実装してみた
+      / https://swiperjs.com/demos/#3D_flip_effect 
+      .swiper-button-prev
+      .swiper-button-next
+  .image-info-box
+    .profile-box.p-3
+      .d-flex.align-items-center
+        = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+        = @post.user.username
+        - if current_user&.own?(@post)
+          .ml-auto
+            = link_to post_path(@post), class: 'mr-3', method: :delete, data: {confirm: '本当に削除しますか？'} do
+              = icon 'far', 'trash-alt', class: 'fa-lg'
+            = link_to edit_post_path(@post) do
+              = icon 'far', 'edit', class: 'fa-lg'
+    / hrで区切り線を引くことができる
+    hr.m-0
+    .post-body.p-3
+      / 投稿の本文
+      .row.no-gutters
+        .col-2
+          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+        .col-10
+          = simple_format(@post.body)
+      hr
+      / コメント一覧
+      .row.no-gutters
+        .col-2
+          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+        .col-10
+          | ダミーコメントダミーコメントダミーコメント
+      hr
+      .row.no-gutters
+        .col-2
+          = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+        .col-10
+          | ダミーコメントダミーコメントダミーコメント
+    hr.m-0
+    .post-comment.p-3
+      form.form-inline.mb-0
+        input type="text" class="form-control input-comment-body" placeholder="コメント"
+        button type="submit" class="btn btn-primary btn-raised"
+          | 投稿

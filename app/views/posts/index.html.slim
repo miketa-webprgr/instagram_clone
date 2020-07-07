@@ -1,0 +1,30 @@
+.container
+  .row
+    .col-md-8.col-12
+      / eachで回すよりパフォーマンスがよい
+      / https://pikawaka.com/rails/partial_template
+      = render @posts
+    .col-md-4.col-12
+      - if logged_in?
+        .profile-box.mb-3
+          = image_tag 'profile-placeholder.png', size: '50x50', class: 'rounded-circle mr-1'
+          = current_user.username
+      .users-box
+        .card
+          .card-header
+            | ユーザー
+          .card-body
+            .user.mb-3
+              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+              | ダミー京介
+            .user.mb-3
+              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+              | ダミー寅泰
+            .user.mb-3
+              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+              | ダミー常松
+            .user.mb-3
+              = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle mr-1'
+              | ダミーまこと
+          .card-footer
+            = link_to 'すべて見る', '#'
