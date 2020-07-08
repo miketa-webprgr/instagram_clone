@@ -80,6 +80,3 @@ Rails/OutputSafety:
 
 Rails/InverseOf:
   Enabled: false
-
-Rails/FilePath:
-  Enabled: false
