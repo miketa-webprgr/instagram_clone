@@ -136,3 +136,10 @@ Temporary Items
 
 # dump.rdb（redisのdbファイル）
 dump.rdb
+
+# rubocopメモ
+# rubocopに指摘されたが、だいそんさんのコードではその指摘内容を反映して修正していない
+# なので、とりあえずrubocopに指摘されないよう除外した
+# その除外リスト
+# なぜ指摘されたかよく調べられていないので、とりあえずメモに退避する
+rubocop_memo.md
