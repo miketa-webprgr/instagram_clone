@@ -24,7 +24,7 @@ class Post < ApplicationRecord
   # ただ、posts_controllerにてJSON形式でデータを受け取るよう指定しているので、整合性を取る必要あり
   serialize :images, JSON
   validates :body, presence: true, length: { maximum: 1000 }
-  validates :images, presence: true  
+  validates :images, presence: true
 
-  belongs_to :user 
+  belongs_to :user
 end

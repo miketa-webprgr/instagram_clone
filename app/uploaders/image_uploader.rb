@@ -1,5 +1,5 @@
 class ImageUploader < CarrierWave::Uploader::Base
-  # Include RMagick or MiniMagick support:  
+  # Include RMagick or MiniMagick support:
   # リサイズなどを行うにあたって、公式も推奨しているMiniMagickを採用
   include CarrierWave::MiniMagick
 
@@ -38,7 +38,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-
   # サムネ用の小さいサイズの画像もアップロードしたい場合に使用する
   # Create different versions of your uploaded files:
   # version :thumb do
@@ -50,7 +49,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
 
   # ファイル名の設定。モデルidを名前に使うなと書いてある。。。

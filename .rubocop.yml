@@ -29,6 +29,7 @@ Metrics/BlockLength:
     - 'Gemfile'
     - 'config/**/*'
     - 'spec/**/*_spec.rb'
+    - 'lib/tasks/*'
 
 Metrics/ClassLength:
   CountComments: false
@@ -78,4 +79,7 @@ Rails/OutputSafety:
     - 'app/helpers/**/*.rb'
 
 Rails/InverseOf:
+  Enabled: false
+
+Rails/FilePath:
   Enabled: false

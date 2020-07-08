@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   def index
     # includesの場合に走るクエリは１回のみ
     # SELECT `users`.* FROM `users` WHERE `users`.`id` IN (49, 48, 47, 46, 45, 44, 43, 42, 41, 40)
-    # Post.all.order(created_at: :desc)だと以下のようなクエリが10回走る   
+    # Post.all.order(created_at: :desc)だと以下のようなクエリが10回走る
     # SELECT  `users`.* FROM `users` WHERE `users`.`id` = 40 LIMIT 1
     @posts = Post.all.includes(:user).order(created_at: :desc)
   end
@@ -53,6 +53,6 @@ class PostsController < ApplicationController
 
   def post_params
     # images:[]とすることで、JSON形式でparamsを受け取る
-    params.require(:post).permit(:body, images:[])
+    params.require(:post).permit(:body, images: [])
   end
 end
