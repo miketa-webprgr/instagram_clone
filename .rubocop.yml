@@ -29,6 +29,7 @@ Metrics/BlockLength:
     - 'Gemfile'
     - 'config/**/*'
     - 'spec/**/*_spec.rb'
+    - 'lib/tasks/*'
 
 Metrics/ClassLength:
   CountComments: false

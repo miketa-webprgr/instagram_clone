@@ -12,6 +12,13 @@ bootstrap@^4.5.0:
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.5.0.tgz#97d9dbcb5a8972f8722c9962483543b907d9b9ec"
   integrity sha512-Z93QoXvodoVslA+PWNdk23Hze4RBYIkpb5h8I2HY2Tu2h7A0LpAgLcyrhrSUyo2/Oxm2l1fRZPs1e5hnxnliXA==
 
+dom7@^3.0.0-alpha.5:
+  version "3.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-3.0.0-alpha.5.tgz#9db8d5f0b28248c3fa07651306ce8dd08ad6d623"
+  integrity sha512-8qnd76DAkn12DSOPCu5EtGiWwMDsagt1lb8zC50UfZ1sfLHixM510RXiQc4DTQsEAi/i3BjD3es7awqUCB+IjQ==
+  dependencies:
+    ssr-window "^3.0.0-alpha.1"
+
 jquery@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
@@ -21,3 +28,16 @@ popper.js@^1.16.1:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
   integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
+
+ssr-window@^3.0.0-alpha.1, ssr-window@^3.0.0-alpha.4:
+  version "3.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-3.0.0-alpha.4.tgz#0c69a18c4305ecccdd8e11596155ca07b635f345"
+  integrity sha512-+dBRP/pZ+VyITxTzD0lMDzDwN/BmfUl8xi2e6t5Nz4+FqUphfcBLB1OOUSYCRNFB25rD3c8AJRYpY5rHTbL+kg==
+
+swiper@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-6.0.0.tgz#d69bfd2e2dc01961c32e6d6bbb7247081cf5a883"
+  integrity sha512-4AQKV5buMseaKLepFxfaMb1qkhviNjyVqiKLJwH0pjPMgrIaSXIWkxyXA4uCUz28II2iFXoLEVG9E+RLFYo7TA==
+  dependencies:
+    dom7 "^3.0.0-alpha.5"
+    ssr-window "^3.0.0-alpha.4"

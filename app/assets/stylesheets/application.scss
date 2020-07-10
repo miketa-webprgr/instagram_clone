@@ -1,4 +1,5 @@
 @import 'bootstrap-material-design/dist/css/bootstrap-material-design';
+@import 'swiper/swiper-bundle';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 
@@ -7,15 +8,88 @@ body {
   height: 100vh;
 }
 
+main {
+  padding-top: 50px;
+}
+
+img {
+  max-width: 100%;
+}
+
 .login-register-form {
   position: relative;
   height: 100vh;
-
   .login-register-form-inner {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   }
 }
+
+.swiper-container {
+  width: 100%;
+}
+
+.post {
+  max-width: 400px;
+  margin: 0 auto;
+  .card-img-top {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+  }
+}
+
+.image-thumbnail {
+  object-fit: cover;
+}
+
+.post-detail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  &.card {
+    flex-direction: row;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .image-box {
+    width: 400px;
+    height: 400px;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+    img {
+      object-fit: cover;
+      width: 400px;
+      height: 400px;
+    }
+  }
+  .image-info-box {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+
+    .post-body {
+      overflow: scroll;
+      max-height: 250px;
+    }
+
+    .post-comment {
+      margin-top: auto;
+      .input-comment-body {
+        flex: 1;
+      }
+    }
+  }}
+

@@ -11,8 +11,7 @@ class UserSessionsController < ApplicationController
 
     if @user
       # sorceryの独自メソッド
-      # ログインしている時はroot_pathへ、ログアウトしている時はログインページへアクセスさせる？
-      # 公式ドキュメント等を見たけれども、いまいち何が言いたいのかよく分からない
+      # 未ログイン状態でログインが必要な画面に遷移しようとする → ログインしてないのでログイン画面に遷移する → ログインする → root_pathではなく当初遷移しようとしていたページに遷移する
       redirect_back_or_to root_path, success: 'ログインしました'
     else
       flash.now[:danger] = 'ログインに失敗しました'
@@ -23,6 +22,6 @@ class UserSessionsController < ApplicationController
   def destroy
     # sorceryの独自メソッド
     logout
-    redirect_to root_path, success: 'ログアウトしました'
+    redirect_to login_path, success: 'ログアウトしました'
   end
 end

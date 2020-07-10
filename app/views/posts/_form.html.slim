@@ -1,0 +1,14 @@
+= form_with model: post, local: true do |f|
+  = render 'shared/error_messages', object: post
+  .form-group
+    = f.label :images
+    = f.file_field :images, multiple: true, class: 'form-control'
+    - post.images.each do |image|
+      /image_tagを使うと、画像を簡単に配置できる
+      /urlメソッドはcarrierwaveのメソッド
+      /https://github.com/carrierwaveuploader/carrierwave#activerecord
+      = image_tag image.url, size: '100x100', class: 'image-thumbnail'
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control'
+  = f.submit class: 'btn btn-primary btn-raised'
