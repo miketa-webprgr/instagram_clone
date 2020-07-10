@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 Kaminari.configure do |config|
-  # config.default_per_page = 25
+  # ページあたり表示数を10件とする
+  # ryotaさんのブログが参考になった
+  # [【Rails】kaminariを使用してページネーション機能を実装 \- Qiita](https://qiita.com/ryota21/items/29fa282745afb1474059#設定ファイルの説明)
+
+  config.default_per_page = 15
   # config.max_per_page = nil
   # config.window = 4
   # config.outer_window = 0
