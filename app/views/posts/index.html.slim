@@ -4,6 +4,7 @@
       / eachで回すよりパフォーマンスがよい
       / https://pikawaka.com/rails/partial_template
       = render @posts
+      = paginate @posts
     .col-md-4.col-12
       - if logged_in?
         .profile-box.mb-3
