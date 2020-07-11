@@ -6,7 +6,12 @@ class PostsController < ApplicationController
     # SELECT `users`.* FROM `users` WHERE `users`.`id` IN (49, 48, 47, 46, 45, 44, 43, 42, 41, 40)
     # Post.all.order(created_at: :desc)だと以下のようなクエリが10回走る
     # SELECT  `users`.* FROM `users` WHERE `users`.`id` = 40 LIMIT 1
-    @posts = Post.all.includes(:user).order(created_at: :desc)
+    
+    # params[:page]が何ページ目であるか示す
+    # 例えば、paginationにて2ページ目を選択すると、params[:page]は2となる
+    # その場合、このクエリが走る => SELECT  `posts`.* FROM `posts` ORDER BY `posts`.`created_at` DESC LIMIT 10 OFFSET 10
+    # ３ページ目を選択すると、このクエリが走る => SELECT  `posts`.* FROM `posts` ORDER BY `posts`.`created_at` DESC LIMIT 10 OFFSET 20
+    @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new
