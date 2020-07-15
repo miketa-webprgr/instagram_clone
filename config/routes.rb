@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   resources :users, only: %i[new create]
-  resources :posts
+
+  # shallowオプションを使うと、一意にリソースを示しつつ、URLを短くすることができる。
+  # 一意であることを諦めるのであれば、「resources :posts, shallow: true do」とすることもできる。
+  resources :posts do
+    resources :comments, shallow: true
+  end
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
