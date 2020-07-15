@@ -44,6 +44,10 @@ gem 'carrierwave'
 gem 'faker'
 gem 'kaminari'
 
+# NGワードの投稿を禁止するために導入。設定方法は以下を参照。
+# https://github.com/joshbuddy/swearjar
+gem 'swearjar'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
