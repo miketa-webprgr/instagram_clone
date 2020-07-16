@@ -1,7 +1,12 @@
+/ 更新がNGワードを含む場合
+- if @ng_flag
+  / NGワードを含む投稿をしたのでアラートを出す
+  | alert("NGワードが含まれています。綺麗な言葉を使いましょう。");
 / 更新がバリデーションに抵触した場合
 - if @comment.errors.present?
   / エラーメッセージをそれぞれ改行して表示する
   | alert("#{@comment.errors.full_messages.join('\n')}");
+/ 更新がNGワードを含まず、バリデーションにも抵触しない場合
 - else
   / 該当のコメントを更新する
   | $("#comment-#{@comment.id}").html("#{j render('comments/comment', comment: @comment)}");

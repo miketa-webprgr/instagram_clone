@@ -12,7 +12,12 @@ class CommentsController < ApplicationController
 
     # ----- 質問 -----
     # だいそんさんの書き方だと、buildとsaveの２行で分けていましたが、createでも大丈夫でしょうか？
-    @comment = current_user.comments.create(comment_params)
+
+    if ng_words?(comment_params[:body])
+      @ng_flag = true
+    else
+      @comment = current_user.comments.create(comment_params)
+    end
   end
 
   def edit
@@ -21,7 +26,11 @@ class CommentsController < ApplicationController
 
   def update
     @comment = current_user.comments.find(params[:id])
-    @comment.update(comment_update_params)
+    if ng_words?(comment_update_params[:body])
+      @ng_flag = true
+    else
+      @comment.update(comment_update_params)
+    end
   end
 
   def destroy
@@ -41,5 +50,14 @@ class CommentsController < ApplicationController
   # commentをupdateする場合、既にpostへ紐づいたcommentのbodyを差し替えるだけなので、bodyのみをpermitすればよい
   def comment_update_params
     params.require(:comment).permit(:body)
+  end
+
+  # NGワードが含まれているかチェックするメソッド
+  # 本当はモデルでバリデーションをかけたくて行錯誤したが上手くいかず（時間をかけたくないので、適当なところで切り上げ）
+  def ng_words?(body)
+    # NGワードをここで読み込む
+    ng_word = Swearjar.new('config/locales/my_swears.yml')
+    # NGワードを含むかチェックする
+    ng_word.profane?(body)
   end
 end
