@@ -44,8 +44,10 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    # N+1 問題については、あとで考える
-    @comments = @post.comments.order(created_at: :desc)
+    # N+1問題への対応方法
+    # includes(:post)ではなく、(:user)を追記
+    # viewの方でユーザーネームを表示させるため、userモデルに紐づいているデータも合わせて取得する
+    @comments = @post.comments.includes(:user).order(created_at: :desc)
     @comment = Comment.new
   end
 
