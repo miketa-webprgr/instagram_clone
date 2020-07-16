@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :require_login, only: %i[create edit update destroy]
+
   def create
     # comments.buildなどのメソッドはRailsガイドを参照
     # https://railsguides.jp/association_basics.html#has-manyで追加されるメソッド-collection-build-attributes
