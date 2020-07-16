@@ -1,0 +1,4 @@
+/ application.html.slimにて読み込んでいる`modal`に、`comments/_modal_form`を差し込む
+| $("#modal-container").html("#{j(render 'modal_form', comment: @comment)}");
+/ JSの力を使って、モーダルとして表示させる
+| $("#comment-edit-modal").modal('show');

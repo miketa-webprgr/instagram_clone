@@ -1,0 +1,14 @@
+.modal#comment-edit-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title コメント編集
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  ×
+      .modal-body
+        / shallowオプションを使用しているため、model: comment とする（postについてはmodelに渡さない）
+        / 以下が参考としたQiita記事
+        / https://qiita.com/snskOgata/items/44d32a06045e6a52d11c#23-form_with-model-modela-modelb
+        = form_with model: comment, class: 'd-flex mb-0 flex-nowrap justify-content-between', remote: true do |f|
+          = f.text_field :body, class: 'form-control input-comment-body', placeholder: 'コメント'
+          = f.submit '投稿', class: 'btn btn-primary btn-raised'
