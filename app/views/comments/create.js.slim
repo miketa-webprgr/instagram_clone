@@ -1,0 +1,10 @@
+/ バリデーションに抵触した場合
+- if @comment.errors.present?
+  / エラーメッセージをそれぞれ改行して、全て表示させる
+  | alert("#{@comment.errors.full_messages.join('\n')}");
+/ バリデーションに抵触しない場合
+- else
+  / 新しい投稿をコメント一覧の一番上に持ってくる
+  | $('.comments-box').prepend("#{j render('comments/comment', comment: @comment)}");
+  / 投稿したので、次の投稿がしやすいように、投稿欄を空にする
+  | $('.input-comment-body').val('');
