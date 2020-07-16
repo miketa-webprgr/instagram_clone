@@ -23,6 +23,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = current_user.comments.find(params[:id])
+    # 仕組み上、通常の操作をしている限りエラーになるはずがないので、destroyに失敗した場合は例外処理とする
+    @comment.destroy!
   end
 
   private
