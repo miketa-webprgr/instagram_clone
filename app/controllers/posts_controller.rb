@@ -44,6 +44,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    # N+1 問題については、あとで考える
+    @comments = @post.comments.order(created_at: :desc)
   end
 
   def destroy
