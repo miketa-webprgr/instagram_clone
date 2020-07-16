@@ -18,7 +18,8 @@ class CommentsController < ApplicationController
   end
 
   def update
-    
+    @comment = current_user.comments.find(params[:id])
+    @comment.update(comment_update_params)
   end
 
   def destroy
@@ -32,4 +33,8 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body).merge(post_id: params[:post_id])
   end
 
+  # commentをupdateする場合、既にpostへ紐づいたcommentのbodyを差し替えるだけなので、bodyのみをpermitすればよい
+  def comment_update_params
+    params.require(:comment).permit(:body)
+  end
 end
