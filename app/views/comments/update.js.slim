@@ -3,7 +3,7 @@
   / エラーメッセージをそれぞれ改行して表示する
   | alert("#{@comment.errors.full_messages.join('\n')}");
 - else
-  / 該当のエラーメッセージを差し替える
+  / 該当のコメントを更新する
   | $("#comment-#{@comment.id}").html("#{j render('comments/comment', comment: @comment)}");
   / 更新が終わったため、モーダルを閉じる
   | $("#comment-edit-modal").modal('hide');
