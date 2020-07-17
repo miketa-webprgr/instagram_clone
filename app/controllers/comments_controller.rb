@@ -2,20 +2,12 @@ class CommentsController < ApplicationController
   before_action :require_login, only: %i[create edit update destroy]
 
   def create
-    # comments.buildなどのメソッドはRailsガイドを参照
-    # https://railsguides.jp/association_basics.html#has-manyで追加されるメソッド-collection-build-attributes
-
-    # current_user.comments.buildにて以下が生成される
-    # {id: nil, body: nil, user_id: 40, post_id: nil, created_at: nil, updated_at: nil}
-    # ここに「body」と「post_id」を持ってきてあげればよい
-    # よって、comment_paramsメソッドでは、:bodyだけpermitして、そこにpost_idを付与してあげるのがベストの形となる
-
-    # ----- 質問 -----
-    # だいそんさんの書き方だと、buildとsaveの２行で分けていましたが、createでも大丈夫でしょうか？
-
     if ng_words?(comment_params[:body])
       @ng_flag = true
     else
+      # current_user.commentsの引数がない場合の中身
+      # {id: nil, body: nil, user_id: 40, post_id: nil, created_at: nil, updated_at: nil}
+      # よって、comment_paramsを引数として、「body」と「post_id」を持ってきてあげればよい
       @comment = current_user.comments.create(comment_params)
     end
   end
