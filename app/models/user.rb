@@ -28,7 +28,7 @@ class User < ApplicationRecord
   # [Active Record の関連付け \- Railsガイド](https://railsguides.jp/association_basics.html#belongs-to%E3%81%AE%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3-dependent)
   has_many :posts, dependent: :destroy
 
-  # Userは消えてもコメントだけは残しておきたい場合、nullifyオプションを使うとよい(その場合、nullifyはhas_oneの方に使う)
+  # なお、Userは消えてもコメントだけは残しておきたい場合、nullifyオプションを使うとよい
   has_many :comments, dependent: :destroy
 
   # objectには@postを代入する
