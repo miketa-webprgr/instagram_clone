@@ -1,0 +1,7 @@
+regex:
+  '^(?=.*おっぱい).*$': ["sexual"]
+  '^(?=.*キチガイ).*$': ["inappropriate"]
+  '^(?=.*デブ).*$': ["discriminatory"]
+  '^(?=.*ハゲ).*$': ["discriminatory"]
+  '^(?=.*バカ).*$': ["insult"]
+  '^(?=.*死ね).*$': ["insult"]

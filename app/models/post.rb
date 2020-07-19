@@ -27,4 +27,8 @@ class Post < ApplicationRecord
   validates :images, presence: true
 
   belongs_to :user
+  # ふと気になったが、destroyオプションとdeleteオプションの違いについても調べてみた
+  # deleteの場合、子であるcommentsまで削除されないので要注意
+  # [delete, delete\_all, destroy, destroy\_allについて \- Qiita](https://qiita.com/kamelo151515/items/0fa7fb15a1d2c1e44db2)
+  has_many :comments, dependent: :destroy
 end

@@ -11,6 +11,8 @@ require 'action_mailer/railtie'
 require 'action_view/railtie'
 require 'action_cable/engine'
 require 'sprockets/railtie'
+require 'swearjar'
+
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -38,7 +40,7 @@ module InstaClone
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]
-    
+
     # generateコマンド時に生成されるファイルに制限をかける
     config.generators do |g|
       g.assets false # CSS, JSが自動生成されない
