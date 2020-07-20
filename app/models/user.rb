@@ -31,6 +31,11 @@ class User < ApplicationRecord
   # なお、Userは消えてもコメントだけは残しておきたい場合、nullifyオプションを使うとよい
   has_many :comments, dependent: :destroy
 
+  # Userはlikesを所有し、likesをしたpostsも所有する
+  # like_postsについて書くことによって、簡単にview側でいいねした投稿を取得することができる
+  has_many :likes, dependent: :destroy
+  has_many :like_posts, through: :likes, source: :post
+
   # objectには@postを代入する
   # 一覧表示されている投稿のidが、current_user.user_idと一致しているか確認する
   # 一致していれば、編集と削除のアイコンを表示させる（index.html.slim及びshow.html.slimにて）
