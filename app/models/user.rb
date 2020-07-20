@@ -42,4 +42,21 @@ class User < ApplicationRecord
   def own?(object)
     id == object.user_id
   end
+
+  # いいねするメソッド
+  def like(post)
+    # like_postsという配列にpostを追加
+    # like_posts.push(post)でもよいはず
+    like_posts << post
+  end
+  
+  # いいねを解除するメソッド
+  def unlike(post)
+    like_posts.destroy(post)
+  end
+  
+  # いいねしているか確認するメソッド
+  def like?(post)
+    like_posts.include?(post)
+  end
 end
