@@ -24,6 +24,10 @@
               = icon 'far', 'trash-alt', class: 'fa-lg'
             = link_to edit_post_path(@post) do
               = icon 'far', 'edit', class: 'fa-lg'
+        / もしcurrent_userがログインしており、この投稿がログインユーザーのものである場合
+        - if current_user && !current_user.own?(@post)
+          .ml-auto
+            = render 'like_area', post: @post
     / hrで区切り線を引くことができる
     hr.m-0
     .post-body.p-3
