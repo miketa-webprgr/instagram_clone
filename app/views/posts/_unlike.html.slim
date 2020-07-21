@@ -1,2 +1,5 @@
+/ = link_to like_path(current_user.likes.find_by(post_id: post.id), post_id: post.id)としたい
+/ controller側でlike_idを付与するのではなく、クライアント側からparamsを2つ送る形としたい（コントローラ側の可読性が高くなる気がしたため）
+/ ただ、controllerの可読性が低いとも言えないし、セキュリティ上、受け取るparamsは出来る限り少なくした方がよい？
 = link_to like_path(current_user.likes.find_by(post_id: post.id)), method: :delete, remote: true do
   = icon 'fa', 'heart', class: 'fa-lg'
