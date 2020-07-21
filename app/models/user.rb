@@ -49,12 +49,12 @@ class User < ApplicationRecord
     # like_posts.push(post)でもよいはず
     like_posts << post
   end
-  
+
   # いいねを解除するメソッド
   def unlike(post)
     like_posts.destroy(post)
   end
-  
+
   # いいねしているか確認するメソッド
   def like?(post)
     like_posts.include?(post)
