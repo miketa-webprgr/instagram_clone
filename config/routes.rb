@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, shallow: true
   end
+  
+  resources :likes, only: %i[create destroy]
 
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
