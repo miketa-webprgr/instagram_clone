@@ -71,4 +71,25 @@ class User < ApplicationRecord
   def like?(post)
     like_posts.include?(post)
   end
+
+  # followするメソッド
+  def follow(other_user)
+    following << other_user
+  end
+
+  # unfollowするメソッド
+  def unfollow(other_user)
+    following.destroy(other_user)
+  end
+
+  # followしているか確認するメソッド
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  # followしているユーザーのpostsを取得するメソッド
+  def feed
+    Post.where(user_id: following_ids << id)
+  end
+
 end
