@@ -1,0 +1,7 @@
+div id="like_area-#{post.id}"
+  / もしログインユーザーがいいねしている投稿の場合、いいね解除用のviewを表示
+  - if current_user.like?(post)
+    = render 'unlike', post: post
+  / もしログインユーザーがいいねしていない投稿の場合、いいね用のviewを表示
+  - else
+    = render 'like', post: post

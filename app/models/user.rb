@@ -31,10 +31,32 @@ class User < ApplicationRecord
   # なお、Userは消えてもコメントだけは残しておきたい場合、nullifyオプションを使うとよい
   has_many :comments, dependent: :destroy
 
+  # Userはlikesを所有し、likesをしたpostsも所有する
+  # like_postsについて書くことによって、簡単にview側でいいねした投稿を取得することができる
+  has_many :likes, dependent: :destroy
+  has_many :like_posts, through: :likes, source: :post
+
   # objectには@postを代入する
   # 一覧表示されている投稿のidが、current_user.user_idと一致しているか確認する
   # 一致していれば、編集と削除のアイコンを表示させる（index.html.slim及びshow.html.slimにて）
   def own?(object)
     id == object.user_id
+  end
+
+  # いいねするメソッド
+  def like(post)
+    # like_postsという配列にpostを追加
+    # like_posts.push(post)でもよいはず
+    like_posts << post
+  end
+
+  # いいねを解除するメソッド
+  def unlike(post)
+    like_posts.destroy(post)
+  end
+
+  # いいねしているか確認するメソッド
+  def like?(post)
+    like_posts.include?(post)
   end
 end

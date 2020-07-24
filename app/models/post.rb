@@ -31,4 +31,9 @@ class Post < ApplicationRecord
   # deleteの場合、子であるcommentsまで削除されないので要注意
   # [delete, delete\_all, destroy, destroy\_allについて \- Qiita](https://qiita.com/kamelo151515/items/0fa7fb15a1d2c1e44db2)
   has_many :comments, dependent: :destroy
+
+  # Postはlikesを所有し、likesをしたusersも所有する
+  # like_usersについて書くことによって、簡単にview側でいいねしたユーザーを取得することができる
+  has_many :likes, dependent: :destroy
+  has_many :like_users, through: :likes, source: :user
 end
