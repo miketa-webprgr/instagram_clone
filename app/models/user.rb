@@ -36,6 +36,18 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_posts, through: :likes, source: :post
 
+  # 外部キーをfollower_idとして指定し、Relationshipモデルを取得する。（つまりfollower_idを取得する）
+  # これを'active_relationships`と命名する。
+  has_many :active_relationship, class_name: 'Relationship', foreign_key: 'followed_id'
+  # 外部キーをfollowed_idとして指定し、Relationshipモデルを取得する。（つまりfollowed_idを取得する）
+  # これを'passive_relationships`と命名する。
+  has_many :passive_relationship, class_name: 'Relationship', foreign_key: 'follower_id'
+
+  # userモデルから、relationshipモデルを通して、followしているユーザーを取得したい
+  has_many :following, through: :relationships, source: :follower
+  # userモデルから、relationshipモデルを通して、followersであるユーザーを取得したい
+  has_many :followers, through: :relationships, source: :followed
+
   # objectには@postを代入する
   # 一覧表示されている投稿のidが、current_user.user_idと一致しているか確認する
   # 一致していれば、編集と削除のアイコンを表示させる（index.html.slim及びshow.html.slimにて）
