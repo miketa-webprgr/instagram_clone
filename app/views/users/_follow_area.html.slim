@@ -1,0 +1,9 @@
+/ ログインしており、かつ、ログインしているユーザー自身でなければ「フォロー・アンフォローボタン」を表示
+- if logged_in? && current_user.id != user.id
+  div id="follow-area-#{user.id}"
+    / ログインしているユーザーがフォローしていれば
+    - if current_user.following?(user)
+      = render 'users/unfollow', user: user
+    / ログインしているユーザーがフォローしていなければ
+    - else
+      = render 'users/follow', user: user

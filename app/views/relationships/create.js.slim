@@ -1,0 +1,2 @@
+/ create処理が実行された後、JSでアンフォローのボタンを表示させる
+| $('#follow-area-#{@user.id}').html("#{j render('users/unfollow', user: @user)}")
