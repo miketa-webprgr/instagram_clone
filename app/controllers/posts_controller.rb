@@ -2,17 +2,17 @@ class PostsController < ApplicationController
   # require_loginは、sorceryのメソッド
   before_action :require_login, only: %i[new create edit update destroy]
   def index
-    # includesのメソッドについて
-      # includesの場合に走るクエリは１回のみ
-      # SELECT `users`.* FROM `users` WHERE `users`.`id` IN (49, 48, 47...)
-      # Post.all.order(created_at: :desc)だと以下のようなクエリが15回走る
-      # SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49 LIMIT 1
+    # --- includesのメソッドについて ---
+    # includesの場合に走るクエリは１回のみ
+    # SELECT `users`.* FROM `users` WHERE `users`.`id` IN (49, 48, 47...)
+    # Post.all.order(created_at: :desc)だと以下のようなクエリが15回走る
+    # SELECT  `users`.* FROM `users` WHERE `users`.`id` = 49 LIMIT 1
 
-    # ページネーションについて
-      # params[:page]が何ページ目であるか示す
-      # 例えば、paginationにて2ページ目を選択すると、params[:page]は2となる
-      # その場合、このクエリが走る 
-        # => SELECT  `posts`.* FROM `posts` ORDER BY `posts`.`created_at` DESC LIMIT 15 OFFSET 15
+    # --- ページネーションについて ---
+    # params[:page]が何ページ目であるか示す
+    # 例えば、paginationにて2ページ目を選択すると、params[:page]は2となる
+    # その場合、このクエリが走る
+    # => SELECT  `posts`.* FROM `posts` ORDER BY `posts`.`created_at` DESC LIMIT 15 OFFSET 15
 
     @posts = if current_user
                # user.rbにて定義したfeedメソッドを活用し、フォローしているユーザーの投稿のみ表示させる
