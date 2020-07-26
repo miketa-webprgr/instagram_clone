@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  def index
+  end
+
   def new
     @user = User.new
   end
@@ -15,6 +18,9 @@ class UsersController < ApplicationController
       flash.now[:danger] = 'ユーザーの作成に失敗しました'
       render :new
     end
+  end
+
+  def show
   end
 
   private
