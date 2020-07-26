@@ -1,9 +1,11 @@
 .container
   .row
     .col-md-8.col-12
-      / eachで回すよりパフォーマンスがよい
-      / https://pikawaka.com/rails/partial_template
-      = render @posts
+      - if @posts.present?
+        = render @posts
+      - else
+        .text-center.font-weight-bold
+          | 投稿がありません
       = paginate @posts
     .col-md-4.col-12
       - if logged_in?
