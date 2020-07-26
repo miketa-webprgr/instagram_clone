@@ -11,6 +11,7 @@ class PostsController < ApplicationController
     # 例えば、paginationにて2ページ目を選択すると、params[:page]は2となる
     # その場合、このクエリが走る => SELECT  `posts`.* FROM `posts` ORDER BY `posts`.`created_at` DESC LIMIT 15 OFFSET 15
     @posts = Post.all.includes(:user).order(created_at: :desc).page(params[:page])
+    @users = User.recent(5)
   end
 
   def new

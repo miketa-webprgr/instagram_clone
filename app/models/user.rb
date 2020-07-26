@@ -48,6 +48,10 @@ class User < ApplicationRecord
   # userモデルから、relationshipモデルを通して、followersであるユーザーを取得したい
   has_many :followers, through: :passive_relationships, source: :follower
 
+  # コントローラでrecentメソッドが使えるようにロジックを実装
+  # countが引数になっており、recent(10)と書くと最新のusersを10件取得できる
+  scope :recent, ->(count) { order(created_at: :desc).limit(count) }
+
   # objectには@postを代入する
   # 一覧表示されている投稿のidが、current_user.user_idと一致しているか確認する
   # 一致していれば、編集と削除のアイコンを表示させる（index.html.slim及びshow.html.slimにて）
