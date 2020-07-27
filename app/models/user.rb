@@ -36,6 +36,22 @@ class User < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_posts, through: :likes, source: :post
 
+  # 外部キーをfollower_idとして指定し、Relationshipモデルを取得する。（follower_idを取得するため）
+  # これを'active_relationships`と命名する。
+  has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy
+  # 外部キーをfollowed_idとして指定し、Relationshipモデルを取得する。（followed_idを取得するため）
+  # これを'passive_relationships`と命名する。
+  has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy
+
+  # userモデルから、relationshipモデルを通して、followしているユーザーを取得したい
+  has_many :following, through: :active_relationships, source: :followed
+  # userモデルから、relationshipモデルを通して、followersであるユーザーを取得したい
+  has_many :followers, through: :passive_relationships, source: :follower
+
+  # コントローラでrecentメソッドが使えるようにロジックを実装
+  # countが引数になっており、recent(10)と書くと最新のusersを10件取得できる
+  scope :recent, ->(count) { order(created_at: :desc).limit(count) }
+
   # objectには@postを代入する
   # 一覧表示されている投稿のidが、current_user.user_idと一致しているか確認する
   # 一致していれば、編集と削除のアイコンを表示させる（index.html.slim及びshow.html.slimにて）
@@ -58,5 +74,25 @@ class User < ApplicationRecord
   # いいねしているか確認するメソッド
   def like?(post)
     like_posts.include?(post)
+  end
+
+  # followするメソッド
+  def follow(other_user)
+    following << other_user
+  end
+
+  # unfollowするメソッド
+  def unfollow(other_user)
+    following.destroy(other_user)
+  end
+
+  # followしているか確認するメソッド
+  def following?(other_user)
+    following.include?(other_user)
+  end
+
+  # followしているユーザーのpostsを取得するメソッド
+  def feed
+    Post.where(user_id: following_ids << id)
   end
 end

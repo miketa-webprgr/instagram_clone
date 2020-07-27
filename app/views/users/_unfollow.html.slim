@@ -1,0 +1,12 @@
+/ 以下、link_to部分の解説
+  1. エンドポイントを考える
+  2. エンドポイントは、relationshipsの適切なidを取得すること
+  3. 手持ちの情報は、current_userとフォローしている該当のユーザーについて
+  4. current_user.active_relatitonshipsを使って、current_userに紐づく中間テーブルにアクセス
+  5. 中間テーブルの中から、followed_idが該当のユーザーのidと同一のものデータを取得
+  6. そのデータをparamsとしてrelationshipsのコントローラに渡す
+  7. そのparamsのidを使って、Railsが適切なURIにアクセスし、destroyアクションが実行される
+  8. relationshipsのコントローラにて、該当のrelationshipsデータ削除の処理を実行する
+
+= link_to relationship_path(current_user.active_relationships.find_by(followed_id: user.id)), class: 'btn btn-warning btn-raised', method: :delete, remote: true do
+  | アンフォロー

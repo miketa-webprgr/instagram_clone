@@ -1,0 +1,4 @@
+/ 該当ユーザーのidをfollowed_idの引数とする
+/ このクエリパラメータを使って、relationshipsデータをcreateする
+= link_to relationships_path(followed_id: user.id), class: 'btn btn-raised btn-outline-warning', method: :post, remote: true do
+  | フォロー
