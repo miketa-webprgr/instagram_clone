@@ -72,10 +72,21 @@ class PostsController < ApplicationController
     redirect_to posts_path, success: '投稿を削除しました'
   end
 
+  # 検索結果を表示させるアクション
+  # body_containメソッドはPostモデルにてscopeを定義した
+  def search
+    @posts = Post.body_contain(search_post_params[:body]).page(params[:page])
+  end
+
   private
 
   def post_params
     # images:[]とすることで、JSON形式でparamsを受け取る
     params.require(:post).permit(:body, images: [])
+  end
+
+  def search_post_params
+    # params.fetch(:q, {})はparams[:q]が空の場合{}を、params[:q]が空でない場合はparams[:q]を返してくれる
+    params.fetch(:q, {}).permit(:body)
   end
 end
