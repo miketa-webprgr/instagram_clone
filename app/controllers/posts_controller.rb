@@ -75,7 +75,7 @@ class PostsController < ApplicationController
   # 検索結果を表示させるアクション
   # body_containメソッドはPostモデルにてscopeを定義した
   def search
-    @posts = Post.body_contain(search_post_params[:body]).page(params[:page])
+    @posts = Post.body_contain(search_post_params[:body]).includes(:user).page(params[:page])
   end
 
   private
