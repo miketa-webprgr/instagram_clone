@@ -74,8 +74,9 @@ class PostsController < ApplicationController
 
   # 検索結果を表示させるアクション
   # body_containメソッドはPostモデルにてscopeを定義した
+  # @search_valueは、application_controller内にあるインスタンス変数（検索ワードが代入されている）
   def search
-    @posts = Post.body_contain(search_post_params[:body]).includes(:user).page(params[:page])
+    @posts = Post.body_contain(@search_value).includes(:user).page(params[:page])
   end
 
   private
@@ -85,8 +86,4 @@ class PostsController < ApplicationController
     params.require(:post).permit(:body, images: [])
   end
 
-  def search_post_params
-    # params.fetch(:q, {})はparams[:q]が空の場合{}を、params[:q]が空でない場合はparams[:q]を返してくれる
-    params.fetch(:q, {}).permit(:body)
-  end
 end
