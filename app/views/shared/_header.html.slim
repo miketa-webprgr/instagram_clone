@@ -13,7 +13,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-info
         a.nav-link href="#"
           = icon 'far', 'heart', class: 'fa-lg'
       li.nav-item
-        a.nav-link href="#"
+        = link_to user_path(current_user), class: 'nav-link' do
           = icon 'far', 'user', class: 'fa-lg'
       li.nav-item
         = link_to 'ログアウト', logout_path, class: 'nav-link', method: :delete
