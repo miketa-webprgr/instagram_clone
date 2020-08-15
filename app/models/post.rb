@@ -18,6 +18,11 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
+  # [概要] Post.body_contain(だいそん)と書くと、投稿のbodyカラムに「だいそん」が含まれる投稿を検索してくれる
+  # [->とは] このマークはラムダであり、メソッドをオブジェクト化するものらしい（後ほどチェリー本できちんと勉強したい）
+  # [？の意味] クエスチョンマークはプレースホルダーというらしく、SQLインジェクトション対策で使うらしい（？を使わない直書きはNG）
+  scope :body_contain, ->(word) { where('body LIKE ?', "%#{word}%") }
+
   mount_uploaders :images, ImageUploader
   # 複数の画像を取り扱う場合、serializeメソッドが必要
   # JSON形式でなくとも、複数の画像を受け取ることは可能
