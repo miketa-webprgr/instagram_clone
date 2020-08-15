@@ -9,3 +9,6 @@
             = @user.username
           .text-center
             = render 'follow_area', user: @user
+          hr
+          .row
+            = render partial: 'posts/thumbnail_post', collection: @user.posts
