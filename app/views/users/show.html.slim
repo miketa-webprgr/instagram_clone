@@ -3,6 +3,12 @@
     .col-md-10.offset-md-1
       .card
         .card-body
+          / ログインしているユーザーのプロフィール画面を開いている場合、プロフィール編集画面へのリンクを表示する
+          / ぼっち演算子を使って、ログインしていない場合であっても例外処理が起きないようにする
+          / ぼっち演算子は「オブジェクト&.メソッド」という形で使う
+          - if current_user&.id == @user.id
+            .text-center.mb-3
+              = link_to 'プロフィール編集', edit_mypage_account_path, class: 'btn btn-raised btn-warning'
           .text-center.mb-3
             = image_tag 'profile-placeholder.png', size: '100x100', class: 'rounded-circle mr-1'
           .profile.text-center.mb-3
