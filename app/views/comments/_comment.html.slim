@@ -2,7 +2,7 @@ div id="comment-#{comment.id}"
   .row.no-gutters
     / アイコン
     .col-2
-      = image_tag 'profile-placeholder.png', size: '40x40', class: 'rounded-circle'
+      = image_tag comment.user.avatar.url, size: '40x40', class: 'rounded-circle mr-1'
     / ユーザー名とコメント本文
     .col-9
       span.font-weight-bold.pr-1

@@ -10,7 +10,9 @@
             .text-center.mb-3
               = link_to 'プロフィール編集', edit_mypage_account_path, class: 'btn btn-raised btn-warning'
           .text-center.mb-3
-            = image_tag 'profile-placeholder.png', size: '100x100', class: 'rounded-circle mr-1'
+            / とりあえずサンプルのアバターを表示していたが、該当のアイコンを表示するよう変更する
+            / なお、carrierwaveで設定済のため、アバターの設定が行われていない場合、デフォルトのサンプルアバターが表示される
+            = image_tag @user.avatar.url, size: '100x100', class: 'rounded-circle mr-1'
           .profile.text-center.mb-3
             = @user.username
           .text-center
