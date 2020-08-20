@@ -4,6 +4,8 @@ class Mypage::AccountsController < Mypage::BaseController
   end
 
   # updateアクション内のコードの書き方については、TechEssentialsで質問した
+  # https://tech-essentials.work/questions/119
+  # current_user.updateと書くのはNG
   def update
     @user = User.find(current_user.id)
     if @user.update(account_params)
@@ -16,6 +18,7 @@ class Mypage::AccountsController < Mypage::BaseController
 
   private
 
+  # 【avatar_cacheを含むparamsが送られてくることはあるのでしょうか？（今後ある？）】
   def account_params
     params.require(:user).permit(:email, :username, :avatar, :avatar_cache)
   end

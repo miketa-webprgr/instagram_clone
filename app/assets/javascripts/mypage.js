@@ -34,7 +34,9 @@ function previewFileWithId(selector) {
       reader.readAsDataURL(file);
 
   // ファイルがない場合、`selector.src`を空にする
-  // この部分についてコードの意義がよく分からなかったので、TechEssentialsで質問した
+  // 【この部分についてコードの意義がよく分かりませんでした】
+  // このコードがあることで以下のようにプレビューが失敗したことが分かるのだが、あえて空にする必要があるのか？（元の画像のままにしておけばよい？）
+  // https://i.gyazo.com/7c684f4f8377c11661fa8368c2ea6699.png
   } else {
       selector.src = "";
   }
