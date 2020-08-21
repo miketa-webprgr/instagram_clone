@@ -1,0 +1,17 @@
+= form_with model: @user, url: mypage_account_path, method: :patch, local: true do |f|
+  / なぜ、だいそんさんのコードでは object: @user ではなく、object: f.object となっているのか分かりませんでした
+  / TechEssentialsで質問して解決（@userでもよいが、f.objectの方が使い回しがしやすいとのこと）
+  / https://tech-essentials.work/questions/121
+  = render 'shared/error_messages', object: @user
+  .form-group
+    = f.label :avatar
+    / onchangeを使うことで、ファイルアップロード後にJSが発火する
+    / acceptオプションを使い、画像ファイルのみしか受け付けないよう制限をかける
+    = f.file_field :avatar, onchange: 'previewFileWithId(preview)', class: 'form-control', accept: 'image/*'
+    / バリデーションエラーが発生してフォームが再表示された場合も、キャッシュを活用してファイルを保持する
+    = f.hidden_field :avatar_cache
+    = image_tag @user.avatar.url, class: 'rounded-circle', id: 'preview', size: '100x100'
+  .form-group
+    = f.label :username
+    = f.text_field :username, class: 'form-control'
+  = f.submit class: 'btn btn-primary btn-raised'
