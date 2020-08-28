@@ -51,6 +51,9 @@ class User < ApplicationRecord
   # userモデルから、relationshipモデルを通して、followersであるユーザーを取得したい
   has_many :followers, through: :passive_relationships, source: :follower
 
+  # Userモデルから通知一覧を取得する
+  has_many :notifications, dependent: :destroy
+
   # コントローラでrecentメソッドが使えるようにロジックを実装
   # countが引数になっており、recent(10)と書くと最新のusersを10件取得できる
   scope :recent, ->(count) { order(created_at: :desc).limit(count) }

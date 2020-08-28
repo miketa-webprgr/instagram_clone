@@ -17,6 +17,8 @@
 class Relationship < ApplicationRecord
   belongs_to :follower, class_name: 'User'
   belongs_to :followed, class_name: 'User'
+  # 通知の元となったリソースであるrelationshipが削除された際には通知自体も削除する仕様とする
+  has_one :notification, as: :notifiable, dependent: :destroy
 
   # NULL制約
   validates :follower_id, presence: true

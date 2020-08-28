@@ -20,6 +20,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Notification < ApplicationRecord
+  # relationships, likes, commentsテーブルにポリモーフィックに関連付ける
   belongs_to :notifiable, polymorphic: true
+  # ユーザーに紐づく通知一覧を取得するため、一対多の関連付けを実装
   belongs_to :user
 end

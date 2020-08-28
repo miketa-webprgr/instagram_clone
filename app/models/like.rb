@@ -22,6 +22,8 @@
 class Like < ApplicationRecord
   belongs_to :user
   belongs_to :post
+  # 通知の元となったリソースであるlikeが削除された際には通知自体も削除する仕様とする
+  has_one :notification, as: :notifiable, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: :post_id }
 end
