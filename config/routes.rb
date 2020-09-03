@@ -21,7 +21,15 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
 
+  resources :notifications, only: [] do
+    # だいそんさんのコードではpatchで新しいアクションを追加する形としていたが、DHH流にやってみることにした
+    resource :read, only: %i[create]
+  end
+
   namespace :mypage do
     resource :account, only: %i[edit update]
+    # プロフィール編集に関するアクションなので、indexアクションはmypageディレクトリ下にネストさせた
+    resources :notifications, only: %i[index]
   end
+
 end
