@@ -23,3 +23,8 @@ ja:
   attributes:
     created_at: '作成日時'
     updated_at: '更新日時'
+  time:
+    formats:
+      default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
+      long: "%Y/%m/%d %H:%M"
+      short: "%m/%d %H:%M"
