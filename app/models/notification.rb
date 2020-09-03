@@ -30,4 +30,17 @@ class Notification < ApplicationRecord
 
   # enumを使って、unreadとreadメソッドで未読通知と既読通知を取得できるようにする
   enum read: { unread: false, read: true }
+
+  # 該当のパーシャルを取得するメソッド
+  # ダックタイピングで後ほど綺麗に整える
+  def call_appropiate_paritial
+    case self.notifiable_type
+    when "Comment"
+      "commented_to_own_post"
+    when "Like"
+      "liked_to_own_post" 
+    when "Relationship"
+      "followed_me"
+    end
+  end
 end
