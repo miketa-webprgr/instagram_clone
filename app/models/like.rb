@@ -26,4 +26,12 @@ class Like < ApplicationRecord
   has_one :notification, as: :notifiable, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: :post_id }
+
+  after_create_commit :create_notifications
+
+  private
+
+  def create_notifications
+    Notification.create(notifiable: self, user: post.user)
+  end
 end

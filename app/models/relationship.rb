@@ -25,4 +25,12 @@ class Relationship < ApplicationRecord
   validates :followed_id, presence: true
   # ユニーク制約
   validates :follower_id, uniqueness: { scope: :followed_id }
+
+  after_create_commit :create_notifications
+
+  private
+
+  def create_notifications
+    Notification.create(notifiable: self, user: followed)
+  end
 end
