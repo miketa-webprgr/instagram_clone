@@ -27,4 +27,7 @@ class Notification < ApplicationRecord
 
   # scopeを定義 → 指定した件数の通知を最新のものから取得する
   scope :recent, ->(count) { order(created_at: :desc).limit(count)}
+
+  # enumを使って、unreadとreadメソッドで未読通知と既読通知を取得できるようにする
+  enum read: { unread: false, read: true }
 end
