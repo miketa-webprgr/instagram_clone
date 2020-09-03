@@ -24,4 +24,7 @@ class Notification < ApplicationRecord
   belongs_to :notifiable, polymorphic: true
   # ユーザーに紐づく通知一覧を取得するため、一対多の関連付けを実装
   belongs_to :user
+
+  # scopeを定義 → 指定した件数の通知を最新のものから取得する
+  scope :recent, ->(count) { order(created_at: :desc).limit(count)}
 end
