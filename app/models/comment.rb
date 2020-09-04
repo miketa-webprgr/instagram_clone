@@ -35,7 +35,7 @@ class Comment < ApplicationRecord
   after_create_commit :create_notifications
 
   # NGワードが含まれてるかチェックし、true/falseを返すメソッド
-  def has_ng_words?
+  def ng_words?
     # NGワードをここで読み込む
     ng_word = Swearjar.new('config/locales/my_swears.yml')
     # NGワードを含んでいるとtrueを返す
