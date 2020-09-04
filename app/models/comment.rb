@@ -20,6 +20,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
+  # URLヘルパーを使うために導入
+  include Rails.application.routes.url_helpers
+
   belongs_to :user
   belongs_to :post
   # 通知の元となったリソースであるcommentが削除された際には通知自体も削除する仕様とする
@@ -39,6 +42,14 @@ class Comment < ApplicationRecord
     ng_word = Swearjar.new('config/locales/my_swears.yml')
     # NGワードを含んでいるとtrueを返す
     ng_word.profane?(self.body)
+  end
+
+  def partial_name
+    'commented_to_own_post'
+  end
+
+  def resource_path
+    post_path(post, anchor: "comment-#{id}")
   end
 
   private

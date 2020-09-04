@@ -15,6 +15,9 @@
 #  index_relationships_on_follower_id_and_followed_id  (follower_id,followed_id) UNIQUE
 #
 class Relationship < ApplicationRecord
+  # URLヘルパーを使うために導入
+  include Rails.application.routes.url_helpers
+
   belongs_to :follower, class_name: 'User'
   belongs_to :followed, class_name: 'User'
   # 通知の元となったリソースであるrelationshipが削除された際には通知自体も削除する仕様とする
@@ -27,6 +30,14 @@ class Relationship < ApplicationRecord
   validates :follower_id, uniqueness: { scope: :followed_id }
 
   after_create_commit :create_notifications
+
+  def partial_name
+    'followed_me'
+  end
+
+  def resource_path
+    user_path(follower)
+  end
 
   private
 

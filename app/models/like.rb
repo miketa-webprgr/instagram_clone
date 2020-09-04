@@ -20,6 +20,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Like < ApplicationRecord
+  # URLヘルパーを使うために導入
+  include Rails.application.routes.url_helpers
+
   belongs_to :user
   belongs_to :post
   # 通知の元となったリソースであるlikeが削除された際には通知自体も削除する仕様とする
@@ -28,6 +31,14 @@ class Like < ApplicationRecord
   validates :user_id, uniqueness: { scope: :post_id }
 
   after_create_commit :create_notifications
+
+  def partial_name
+    'liked_to_own_post'
+  end
+
+  def resource_path
+    post_path(post)
+  end
 
   private
 
