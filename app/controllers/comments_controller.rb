@@ -36,5 +36,4 @@ class CommentsController < ApplicationController
   def comment_update_params
     params.require(:comment).permit(:body)
   end
-
 end

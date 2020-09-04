@@ -31,5 +31,4 @@ Rails.application.routes.draw do
     # プロフィール編集に関するアクションなので、indexアクションはmypageディレクトリ下にネストさせた
     resources :notifications, only: %i[index]
   end
-
 end

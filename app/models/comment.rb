@@ -39,7 +39,7 @@ class Comment < ApplicationRecord
     # NGワードをここで読み込む
     ng_word = Swearjar.new('config/locales/my_swears.yml')
     # NGワードを含んでいるとtrueを返す
-    ng_word.profane?(self.body)
+    ng_word.profane?(body)
   end
 
   # ダックタイピングのため、overrideする
