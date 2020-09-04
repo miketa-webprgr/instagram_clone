@@ -6,5 +6,5 @@
   object
     = link_to '投稿', post_path(notification.notifiable.post)
   | にいいねしました
-  .text-right
+  .ml-auto
     = l notification.created_at, format: :short

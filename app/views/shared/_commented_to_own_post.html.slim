@@ -14,6 +14,9 @@
     / anchorを貼ることで、ページの途中にコメントがある場合であっても、該当のコメントがすぐ見れるように設定する
     = link_to 'コメント', post_path(notification.notifiable.post, anchor: "comment-#{notification.notifiable.id}")
   | しました
-  .text-right
+  / よく見たら、マイページで使うものは`.text-right`となっていましたが、そこまで対応する元気がないのでそのままとしました
+  / 単純に対応するにはパーシャルを作ってしまえばよいんでしょうが、scssでどうにかできないか少し調べてみました（けど、断念。。。）
+  / scssについて全く知りませんでしたが、条件分岐が出来たりして、奥がかなり深そうなことを今更ながら知りました
+  .ml-auto
     / localizeメソッド。日時のフォーマットを修正するのに有効。
     = l notification.created_at, format: :short
