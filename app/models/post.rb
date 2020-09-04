@@ -41,4 +41,7 @@ class Post < ApplicationRecord
   # like_usersについて書くことによって、簡単にview側でいいねしたユーザーを取得することができる
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
+
+  # 不要であるように思うが、だいそんさんのコードに入っていたのでコメントアウトする形で入れておきます（試行錯誤していく中での削除漏れ？）
+  # has_one :notification, as: :notifiable, dependent: :destroy
 end
