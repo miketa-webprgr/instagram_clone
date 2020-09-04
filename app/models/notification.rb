@@ -36,7 +36,7 @@ class Notification < ApplicationRecord
 
   # 該当のパーシャルを取得するメソッド
   # ダックタイピングで後ほど綺麗に整える
-  def call_appropiate_paritial
+  def call_appropiate_partial
     case self.notifiable_type
     when "Comment"
       "commented_to_own_post"
