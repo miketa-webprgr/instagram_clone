@@ -15,13 +15,11 @@
 #  index_relationships_on_follower_id_and_followed_id  (follower_id,followed_id) UNIQUE
 #
 class Relationship < ApplicationRecord
-  # URLヘルパーを使うために導入
-  include Rails.application.routes.url_helpers
-
   belongs_to :follower, class_name: 'User'
   belongs_to :followed, class_name: 'User'
-  # 通知の元となったリソースであるrelationshipが削除された際には通知自体も削除する仕様とする
-  has_one :notification, as: :notifiable, dependent: :destroy
+
+  # ダックタイピング用（Notificationモデルのpartial_name, resource_pathメソッドを上書き）
+  include Notifiable
 
   # NULL制約
   validates :follower_id, presence: true
@@ -31,10 +29,12 @@ class Relationship < ApplicationRecord
 
   after_create_commit :create_notifications
 
+  # ダックタイピングのため、overrideする
   def partial_name
     'followed_me'
   end
 
+  # ダックタイピングのため、overrideする
   def resource_path
     user_path(follower)
   end

@@ -20,22 +20,22 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Like < ApplicationRecord
-  # URLヘルパーを使うために導入
-  include Rails.application.routes.url_helpers
-
   belongs_to :user
   belongs_to :post
-  # 通知の元となったリソースであるlikeが削除された際には通知自体も削除する仕様とする
-  has_one :notification, as: :notifiable, dependent: :destroy
+
+  # ダックタイピング用（Notificationモデルのpartial_name, resource_pathメソッドを上書き）
+  include Notifiable
 
   validates :user_id, uniqueness: { scope: :post_id }
 
   after_create_commit :create_notifications
 
+  # ダックタイピングのため、overrideする
   def partial_name
     'liked_to_own_post'
   end
 
+  # ダックタイピングのため、overrideする
   def resource_path
     post_path(post)
   end
