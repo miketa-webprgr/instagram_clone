@@ -18,7 +18,7 @@ class Relationship < ApplicationRecord
   belongs_to :follower, class_name: 'User'
   belongs_to :followed, class_name: 'User'
 
-  # ダックタイピング用（Notificationモデルのpartial_name, resource_pathメソッドを上書き）
+  # 共通化（アソシエーション、コールバックによるcreate_notifications）、ダックタイピング用
   include Notifiable
 
   # NULL制約
@@ -26,8 +26,6 @@ class Relationship < ApplicationRecord
   validates :followed_id, presence: true
   # ユニーク制約
   validates :follower_id, uniqueness: { scope: :followed_id }
-
-  after_create_commit :create_notifications
 
   # ダックタイピングのため、overrideする
   def partial_name
@@ -39,9 +37,8 @@ class Relationship < ApplicationRecord
     user_path(follower)
   end
 
-  private
-
-  def create_notifications
-    Notification.create(notifiable: self, user: followed)
+  # ダックタイピングのため、overrideする
+  def notification_user
+    followed
   end
 end

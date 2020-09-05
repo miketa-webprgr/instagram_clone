@@ -23,12 +23,10 @@ class Like < ApplicationRecord
   belongs_to :user
   belongs_to :post
 
-  # ダックタイピング用（Notificationモデルのpartial_name, resource_pathメソッドを上書き）
+  # 共通化（アソシエーション、コールバックによるcreate_notifications）、ダックタイピング用
   include Notifiable
 
   validates :user_id, uniqueness: { scope: :post_id }
-
-  after_create_commit :create_notifications
 
   # ダックタイピングのため、overrideする
   def partial_name
@@ -40,9 +38,8 @@ class Like < ApplicationRecord
     post_path(post)
   end
 
-  private
-
-  def create_notifications
-    Notification.create(notifiable: self, user: post.user)
+  # ダックタイピングのため、overrideする
+  def notification_user
+    post.user
   end
 end
