@@ -29,12 +29,15 @@ class Comment < ApplicationRecord
   # NULL制約と文字列長1000文字の制約を追加
   validates :body, presence: true, length: { maximum: 1000 }
 
+  # NGワード制約を追加
+  validate :body_cannot_include_ng_words
+
   # NGワードが含まれてるかチェックし、true/falseを返すメソッド
-  def ng_words?
+  def body_cannot_include_ng_words
     # NGワードをここで読み込む
-    ng_word = Swearjar.new('config/locales/my_swears.yml')
-    # NGワードを含んでいるとtrueを返す
-    ng_word.profane?(body)
+    ng_words = Swearjar.new('config/locales/my_swears.yml')
+    # NGワードを含んでいるerrorを返す
+    errors.add(:body, 'にはNGワードが含まれています。綺麗な言葉を使いましょう。') if ng_words.profane?(body)
   end
 
   # ダックタイピングのため、overrideする

@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     # {id: nil, body: nil, user_id: 40, post_id: nil, created_at: nil, updated_at: nil}
     # よって、comment_paramsを引数として、「body」と「post_id」を持ってきてあげればよい
     @comment = current_user.comments.build(comment_params)
-    @comment.save unless @comment.ng_words?
+    @comment.save
   end
 
   def edit
@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment = current_user.comments.find(params[:id])
-    @comment.update(comment_update_params) unless @comment.ng_words?
+    @comment.update(comment_update_params)
   end
 
   def destroy

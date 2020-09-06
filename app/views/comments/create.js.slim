@@ -1,11 +1,5 @@
-/ NGワードを含む場合
-- if @comment.ng_words?
-  / NGワードを含む投稿をしたのでアラートを出す
-  | alert("NGワードが含まれています。綺麗な言葉を使いましょう。");
-  / NGワードを含む投稿をしたので、次の投稿がしやすいように投稿欄を空にする
-  | $('.input-comment-body').val('');
 / バリデーションに抵触した場合
-- elsif @comment.errors.present?
+- if @comment.errors.present?
   / エラーメッセージをそれぞれ改行して、全て表示させる
   | alert("#{@comment.errors.full_messages.join('\n')}");
 / NGワードを含まず、バリデーションにも抵触しない場合
