@@ -31,6 +31,10 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 1000 }
   validates :images, presence: true
 
+  # NGワード制約を追加
+  include ActiveModel::Validations
+  validates_with NgWordsValidator
+
   belongs_to :user
   # ふと気になったが、destroyオプションとdeleteオプションの違いについても調べてみた
   # deleteの場合、子であるcommentsまで削除されないので要注意
