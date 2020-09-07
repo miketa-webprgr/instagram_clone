@@ -1,0 +1,8 @@
+- if current_user.notifications.present?
+  - current_user.notifications.recent(10).each do |notification|
+    = render "shared/#{notification.call_appropiate_partial}", notification: notification
+  - if current_user.notifications.count > 10
+    = link_to 'すべてみる', mypage_notifications_path, class: 'dropdown-item justify-content-center'
+- else
+  .dropdown-item
+    | お知らせはありません

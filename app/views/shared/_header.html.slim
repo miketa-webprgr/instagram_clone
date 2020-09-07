@@ -10,8 +10,16 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-info
         = link_to new_post_path, class: 'nav-link' do
           = icon 'far', 'image', class: 'fa-lg'
       li.nav-item
-        a.nav-link href="#"
-          = icon 'far', 'heart', class: 'fa-lg'
+        / Bootstapを使って、ドロップダウンのボタンにすることができる
+        / https://getbootstrap.com/docs/4.0/components/dropdowns/#single-button-dropdowns
+        .dropdown
+          a#dropdownMenuButton.nav-link.position-relative href="#" data-toggle="dropdown" aria-expanded="false" aria-haspopup="true"
+            = icon 'far', 'heart', class: 'fa-lg'
+            / 未読の通知数をアイコンの右上に表示させる
+            = render 'shared/unread_badge'
+          #header-notifications.dropdown-menu.dropdown-menu-right.m-0.p-0 aria-labelledby="dropdownMenuButton"
+            / クリックをすると、未読の通知一覧がドロップダウン形式で表示される
+            = render 'shared/header_notifications'
       li.nav-item
         = link_to user_path(current_user), class: 'nav-link' do
           = icon 'far', 'user', class: 'fa-lg'

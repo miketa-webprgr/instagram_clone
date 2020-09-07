@@ -1,7 +1,12 @@
 @import 'bootstrap-material-design/dist/css/bootstrap-material-design.css';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+@import 'header';
 
 main {
   padding-top: 50px;
+}
+
+.read {
+  background: #f1f1f1;
 }

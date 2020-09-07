@@ -47,5 +47,10 @@ module InstaClone
       g.test_framework false # Minitestが自動生成されない
       g.skip_routes true # ルーティングが自動生成されない
     end
+
+    # カスタムバリデータを使用する
+    class Application < Rails::Application
+      config.autoload_paths += Dir["#{config.root}/app/validators"]
+    end
   end
 end

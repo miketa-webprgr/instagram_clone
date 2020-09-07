@@ -31,6 +31,9 @@ class Post < ApplicationRecord
   validates :body, presence: true, length: { maximum: 1000 }
   validates :images, presence: true
 
+  # NGワード制約を追加
+  validates_with NgWordsValidator
+
   belongs_to :user
   # ふと気になったが、destroyオプションとdeleteオプションの違いについても調べてみた
   # deleteの場合、子であるcommentsまで削除されないので要注意
@@ -41,4 +44,7 @@ class Post < ApplicationRecord
   # like_usersについて書くことによって、簡単にview側でいいねしたユーザーを取得することができる
   has_many :likes, dependent: :destroy
   has_many :like_users, through: :likes, source: :user
+
+  # 不要であるように思うが、だいそんさんのコードに入っていたのでコメントアウトする形で入れておきます（試行錯誤していく中での削除漏れ？）
+  # has_one :notification, as: :notifiable, dependent: :destroy
 end
