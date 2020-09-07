@@ -30,8 +30,8 @@ class Comment < ApplicationRecord
   validates :body, presence: true, length: { maximum: 1000 }
 
   # NGワード制約を追加
-  include ActiveModel::Validations
   validates_with NgWordsValidator
+
   # ダックタイピングのため、overrideする
   def partial_name
     'commented_to_own_post'
