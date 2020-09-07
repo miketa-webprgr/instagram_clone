@@ -32,7 +32,6 @@ class Post < ApplicationRecord
   validates :images, presence: true
 
   # NGワード制約を追加
-  include ActiveModel::Validations
   validates_with NgWordsValidator
 
   belongs_to :user
