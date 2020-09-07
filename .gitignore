@@ -143,3 +143,6 @@ dump.rdb
 # その除外リスト
 # なぜ指摘されたかよく調べられていないので、とりあえずメモに退避する
 rubocop_memo.md
+
+# solargraph
+.solargraph.yml
