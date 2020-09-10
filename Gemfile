@@ -43,6 +43,7 @@ gem 'font-awesome-sass'
 gem 'carrierwave'
 gem 'faker'
 gem 'kaminari'
+gem 'config'
 
 # NGワードの投稿を禁止するために導入。設定方法は以下を参照。
 # https://github.com/joshbuddy/swearjar
@@ -71,4 +72,5 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-byebug'
   gem 'pry-rails'
+  gem 'letter_opener_web'
 end
