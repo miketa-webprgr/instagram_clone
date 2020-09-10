@@ -12,7 +12,7 @@ module Notifiable
     # after_create_commitは、after_commitのエイリアスメソッド
     # after_saveというメソッドもあるが、こちらはDBにsaveする直前に発火するメソッド
     # DBの制約に抵触して保存できない場合も考慮して、after_create_commitとする
-    after_create_commit :create_notifications
+    after_create_commit :create_notifications, :send_notification_mail
   end
 
   def partial_name
@@ -27,10 +27,18 @@ module Notifiable
     raise NotImplementedError
   end
 
+  def run_user_mailer_action
+    raise NotImplementedError
+  end
+
   private
 
   # 通知を作成するメソッド（ダックタイピングを活用）
   def create_notifications
     Notification.create(notifiable: self, user: notification_user)
+  end
+
+  def send_notification_mail
+    run_user_mailer_action #=> メソッド名が思いつきません。。。
   end
 end

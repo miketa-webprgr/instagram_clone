@@ -46,4 +46,9 @@ class Comment < ApplicationRecord
   def notification_user
     post.user
   end
+
+  # ダックタイピングのため、overrideする
+  def run_user_mailer_action
+    UserMailer.with(user_from: user, user_to: post.user, comment: self).comment_post.deliver_later
+  end
 end
