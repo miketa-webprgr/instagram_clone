@@ -1,6 +1,7 @@
 class RelationshipsController < ApplicationController
   before_action :require_login, only: %i[create destroy]
 
+  # コールバックにより、@relationshipがDBに保存されるとフォローされたユーザーにメールが送信されるので注意すること
   def create
     @user = User.find(params[:followed_id])
     current_user.follow(@user)

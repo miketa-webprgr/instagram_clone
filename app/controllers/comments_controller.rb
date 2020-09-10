@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :require_login, only: %i[create edit update destroy]
 
+  # コールバックにより、@commentがDBに保存されるとコメントがあった投稿のユーザーにメールが送信されるので注意すること
   def create
     # current_user.commentsの引数がない場合の中身
     # {id: nil, body: nil, user_id: 40, post_id: nil, created_at: nil, updated_at: nil}
