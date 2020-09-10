@@ -146,3 +146,8 @@ rubocop_memo.md
 
 # solargraph
 .solargraph.yml
+
+# config関係
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
