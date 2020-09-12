@@ -31,4 +31,7 @@ Rails.application.routes.draw do
     # プロフィール編集に関するアクションなので、indexアクションはmypageディレクトリ下にネストさせた
     resources :notifications, only: %i[index]
   end
+
+  # LetterOpenerWebのルーティングを設定する
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

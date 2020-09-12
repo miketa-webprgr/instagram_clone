@@ -35,6 +35,13 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Action MailerのViewファイル作成の際、urlを簡単に設定できるようhostを定義する
+  # Settingsという名前で定数管理をする
+  config.action_mailer.default_url_options = Settings.default_url_options.to_h
+
+  # Action Mailerの配信方法（letter_opener_webとする）
+  config.action_mailer.delivery_method = :letter_opener_web
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

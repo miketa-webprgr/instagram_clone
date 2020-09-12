@@ -37,8 +37,15 @@ class Relationship < ApplicationRecord
     user_path(follower)
   end
 
+  private
+
   # ダックタイピングのため、overrideする
-  def notification_user
-    followed
+  def create_notifications
+    Notification.create(notifiable: self, user: followed)
+  end
+
+  # ダックタイピングのため、overrideする
+  def send_notification_mail
+    UserMailer.with(user_from: follower, user_to: followed).follow.deliver_later
   end
 end
