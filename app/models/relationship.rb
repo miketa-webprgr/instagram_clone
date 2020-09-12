@@ -42,8 +42,10 @@ class Relationship < ApplicationRecord
     followed
   end
 
+  private
+
   # ダックタイピングのため、overrideする
-  def run_user_mailer_action
+  def send_notification_mail
     UserMailer.with(user_from: follower, user_to: followed).follow.deliver_later
   end
 end

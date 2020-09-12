@@ -27,10 +27,6 @@ module Notifiable
     raise NotImplementedError
   end
 
-  def run_user_mailer_action
-    raise NotImplementedError
-  end
-
   private
 
   # 通知を作成するメソッド（ダックタイピングを活用）
@@ -39,6 +35,6 @@ module Notifiable
   end
 
   def send_notification_mail
-    run_user_mailer_action #=> メソッド名が思いつきません。。。
+    raise NotImplementedError
   end
 end
