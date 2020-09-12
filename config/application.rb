@@ -44,6 +44,9 @@ module InstaClone
     # カスタムバリデータを使用する
     config.autoload_paths += Dir["#{config.root}/app/validators"]
 
+    # バックグラウンドでキューを処理するサーバーとしてsidekiqを指定
+    config.active_job.queue_adapter = :sidekiq
+
     # generateコマンド時に生成されるファイルに制限をかける
     config.generators do |g|
       g.assets false # CSS, JSが自動生成されない

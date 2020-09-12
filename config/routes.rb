@@ -1,3 +1,6 @@
+# Sidekiqのダッシュボード導入のために必要
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   # ログインの有無にかかわらず、まず投稿一覧にアクセスする仕様にした（だいそんさんに合わせた）
   root 'posts#index'
@@ -32,6 +35,10 @@ Rails.application.routes.draw do
     resources :notifications, only: %i[index]
   end
 
-  # LetterOpenerWebのルーティングを設定する
-  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+  if Rails.env.development?
+    # LetterOpenerWebのルーティングを設定する
+    mount LetterOpenerWeb::Engine, at: '/letter_opener'
+    # Sidekiqのダッシュボードを設定する
+    mount Sidekiq::Web, at: '/sidekiq'
+  end
 end
