@@ -37,12 +37,12 @@ class Relationship < ApplicationRecord
     user_path(follower)
   end
 
-  # ダックタイピングのため、overrideする
-  def notification_user
-    followed
-  end
-
   private
+
+  # ダックタイピングのため、overrideする
+  def create_notifications
+    Notification.create(notifiable: self, user: followed)
+  end
 
   # ダックタイピングのため、overrideする
   def send_notification_mail

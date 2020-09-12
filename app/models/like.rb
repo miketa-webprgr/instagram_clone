@@ -38,12 +38,12 @@ class Like < ApplicationRecord
     post_path(post)
   end
 
-  # ダックタイピングのため、overrideする
-  def notification_user
-    post.user
-  end
-
   private
+
+  # ダックタイピングのため、overrideする
+  def create_notifications
+    Notification.create(notifiable: self, user: post.user)
+  end
 
   # ダックタイピングのため、overrideする
   def send_notification_mail

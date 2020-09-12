@@ -23,15 +23,10 @@ module Notifiable
     raise NotImplementedError
   end
 
-  def notification_user
-    raise NotImplementedError
-  end
-
   private
 
-  # 通知を作成するメソッド（ダックタイピングを活用）
   def create_notifications
-    Notification.create(notifiable: self, user: notification_user)
+    raise NotImplementedError
   end
 
   def send_notification_mail
