@@ -41,16 +41,14 @@ module InstaClone
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]
 
+    # カスタムバリデータを使用する
+    config.autoload_paths += Dir["#{config.root}/app/validators"]
+
     # generateコマンド時に生成されるファイルに制限をかける
     config.generators do |g|
       g.assets false # CSS, JSが自動生成されない
       g.test_framework false # Minitestが自動生成されない
       g.skip_routes true # ルーティングが自動生成されない
-    end
-
-    # カスタムバリデータを使用する
-    class Application < Rails::Application
-      config.autoload_paths += Dir["#{config.root}/app/validators"]
     end
   end
 end
