@@ -33,6 +33,7 @@ Rails.application.routes.draw do
     resource :account, only: %i[edit update]
     # プロフィール編集に関するアクションなので、indexアクションはmypageディレクトリ下にネストさせた
     resources :notifications, only: %i[index]
+    resource :notification_setting, only: %i[edit update]
   end
 
   if Rails.env.development?
