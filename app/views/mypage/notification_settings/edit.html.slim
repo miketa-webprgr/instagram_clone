@@ -1,6 +1,10 @@
 = form_with model: @user, url: mypage_notification_setting_path, method: :patch, local: true do |f|
   = render 'shared/error_messages', object: @user
   .form-group
+    / 今回は、ビューの実装にもこだわって、ほぼ回答を見るなくチャレンジしました
+    / BMDのサイトを参考にして、checkboxクラスをあててみました（ただ、微妙ですね。。。特に文字が半透明になるのが。。。）
+    / https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/material-design/forms/
+    / 実装後の参考画像：https://i.gyazo.com/08c66a511091d974219eaa474fe404f8.png
     .checkbox 
       = f.check_box :notification_on_comment
       = f.label :notification_on_comment

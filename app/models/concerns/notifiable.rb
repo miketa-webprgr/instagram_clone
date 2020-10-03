@@ -13,6 +13,7 @@ module Notifiable
     # after_saveというメソッドもあるが、こちらはDBにsaveする直前に発火するメソッド
     # DBの制約に抵触して保存できない場合も考慮して、after_create_commitとする
     after_create_commit :create_notifications
+    # 条件付きコールバックを実装してみた
     after_create_commit :send_notification_mail, if: :send_mail?
   end
 
