@@ -11,6 +11,9 @@ ja:
         password_confirmation: 'パスワード確認'
         username: 'ユーザー名'
         avatar: 'アバター'
+        notification_on_comment: 'コメントがあった時に通知する'
+        notification_on_like: 'いいねされた時に通知する'
+        notification_on_follow: 'フォローされた時に通知する'
       post:
         images: '画像'
         body: '本文'
