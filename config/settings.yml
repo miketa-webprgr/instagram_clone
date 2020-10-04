@@ -1,0 +1,12 @@
+meta:
+  site: InstaClone
+  title: InstaClone - Railsの実践的アプリケーション
+  description: Ruby on Railsの実践的な課題です。Sidekiqを使った非同期処理やトランザクションを利用した課金処理など実践的な内容が学べます。
+  keywords:
+    - Rails
+    - InstaClone
+    - Rails特訓コース
+  og:
+    type: website
+    # 画像をGitHubにpushしたくなかったので、URLで指定しています
+    image_path: https://i.gyazo.com/9e198c10b972906d645516e86b89c66b.png
