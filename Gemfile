@@ -46,6 +46,7 @@ gem 'kaminari'
 gem 'config'
 gem 'sidekiq'
 gem 'sinatra'
+gem 'meta-tags'
 
 # NGワードの投稿を禁止するために導入。設定方法は以下を参照。
 # https://github.com/joshbuddy/swearjar
