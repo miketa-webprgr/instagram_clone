@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_013319) do
+ActiveRecord::Schema.define(version: 2020_10_03_100138) do
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "body", null: false
@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(version: 2020_08_28_013319) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
+    t.boolean "notification_on_comment", default: true
+    t.boolean "notification_on_like", default: true
+    t.boolean "notification_on_follow", default: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end

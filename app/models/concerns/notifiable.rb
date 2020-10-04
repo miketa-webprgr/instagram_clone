@@ -12,7 +12,9 @@ module Notifiable
     # after_create_commitは、after_commitのエイリアスメソッド
     # after_saveというメソッドもあるが、こちらはDBにsaveする直前に発火するメソッド
     # DBの制約に抵触して保存できない場合も考慮して、after_create_commitとする
-    after_create_commit :create_notifications, :send_notification_mail
+    after_create_commit :create_notifications
+    # 条件付きコールバックを実装してみた
+    after_create_commit :send_notification_mail, if: :send_mail?
   end
 
   def partial_name
@@ -30,6 +32,10 @@ module Notifiable
   end
 
   def send_notification_mail
+    raise NotImplementedError
+  end
+
+  def send_mail?
     raise NotImplementedError
   end
 end

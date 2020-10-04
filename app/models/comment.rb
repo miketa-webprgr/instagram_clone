@@ -53,4 +53,9 @@ class Comment < ApplicationRecord
   def send_notification_mail
     UserMailer.with(user_from: user, user_to: post.user, comment: self).comment_post.deliver_later
   end
+
+  # ダックタイピングのため、overrideする
+  def send_mail?
+    user.notification_on_comment
+  end
 end
