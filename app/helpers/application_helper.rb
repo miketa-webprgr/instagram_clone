@@ -27,7 +27,7 @@ module ApplicationHelper
       twitter: {
         card: 'summary_large_image',
         image: {
-          _: Settings.meta.og.image_path,
+          _: Settings.meta.og.image_path
         }
       },
       # アイコンを設定してみました（みけた独自）。
@@ -47,13 +47,13 @@ module ApplicationHelper
         { href: '/favicon/android-icon-192x192.png', sizes: '192x192', type: 'image/png' },
         { href: '/favicon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
         { href: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-        { href: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+        { href: '/favicon/favicon-16x16.png', sizes: '16x16', type: 'image/png' }
       ],
       # その他、favicon-generatorに勧められた内容を設定した（主にWindows用）
       # ハイフンを含むハッシュの場合、クオートで囲まないと例外処理となってしまう
       'msapplication-TileColor': '#ffffff',
       'application-TileImage': '/favicon/ms-icon-144x144.png',
-      'theme-color': '#ffffff',
+      'theme-color': '#ffffff'
     }
   end
 end
