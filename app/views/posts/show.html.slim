@@ -1,3 +1,7 @@
+/ モデル側でうまく設定すると、set_meta_tags @post と書ける
+/ モデル側でフルパスを取得できないいか試行錯誤してみましたが、知識不足で断念（あまりいい方法じゃない？）
+- set_meta_tags title: '投稿詳細ページ', description: @post.body,
+        og: { image: "#{request.base_url}#{@post.images.first.url}"} # 本来carrierwaveのasset_pathで設定すべき
 .post-detail.card
   .image-box
     .swiper-container
