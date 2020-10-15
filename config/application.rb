@@ -53,5 +53,16 @@ module InstaClone
       g.test_framework false # Minitestが自動生成されない
       g.skip_routes true # ルーティングが自動生成されない
     end
+
+    # RSpecでテストファイルを自動生成したり、作成するテストファイルを制限したい場合、
+    # 以下のように記述をして、設定を行うことができる（上記のgeneratorsを上書きする）
+    # config.generators do |g|
+    #   g.test_framework :rspec,
+    #     view_specs: false,
+    #     helper_specs: false,
+    #     controller_specs: false,
+    #     routing_specs: false,
+    #     request_specs: false
+    # end
   end
 end
