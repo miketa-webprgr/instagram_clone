@@ -64,5 +64,10 @@ module InstaClone
     #     routing_specs: false,
     #     request_specs: false
     # end
+
+    # FactoryBotを自動生成したくない場合、以下のように設定する
+    # config.generators do |g|
+    #   g.factory_bot false
+    # end
   end
 end
