@@ -44,26 +44,36 @@ RSpec.describe Post, type: :model do
       expect(build(:post).valid?).to be true
     end
 
-    it '新しいpostを { body: nil } で作成するとfalseが返る' do
-      expect(build(:post, body: nil).valid?).to be false
+    it '新しいpostを { body: nil } で作成するとエラーを返す' do
+      post = build(:post, body: nil)
+      expect(post.valid?).to be false
+      expect(post.errors[:body]).to include 'を入力してください'
     end
 
-    it '新しいpostを { body: '' } で作成するとfalseが返る' do
-      expect(build(:post, body: '').valid?).to be false
+    it '新しいpostを { body: '' } で作成するとエラーを返す' do
+      post = build(:post, body: '')
+      expect(post.valid?).to be false
+      expect(post.errors[:body]).to include 'を入力してください'
     end
 
-    it '新しいpostを { images: nil } で作成するとfalseが返る' do
-      expect(build(:post, images: nil).valid?).to be false
+    it '新しいpostを { images: nil } で作成するとエラーを返す' do
+      post = build(:post,images: nil)
+      expect(post.valid?).to be false
+      expect(post.errors[:images]).to include 'を入力してください'
     end
 
-    it '新しいpostを { images: '' } で作成するとfalseが返る' do
-      expect(build(:post, images: '').valid?).to be false
+    it '新しいpostを { images: '' } で作成するとエラーを返す' do
+      post = build(:post, images: '')
+      expect(post.valid?).to be false
+      expect(post.errors[:images]).to include 'を入力してください'
     end
   end
 
   describe 'validation（ length 1,000文字 ）' do
     it '新しいpostを1,001字で作成するとfalseが返る' do
-      expect(build(:post, body: 'a' * 1001).valid?).to be false
+      post = build(:post, body: 'a' * 1001)
+      expect(post.valid?).to be false
+      expect(post.errors[:body]).to include 'は1000文字以内で入力してください'
     end
   end
 
@@ -75,7 +85,7 @@ RSpec.describe Post, type: :model do
     it '新しいpostを { body: おっぱいいっぱい、ゆめいっぱい！} で作成すると専用のエラーメッセージが表示される' do
       post = build(:post, body: 'おっぱいいっぱい、ゆめいっぱい！')
       post.valid?
-      expect(post.errors[:body]).to include ('にはNGワードが含まれています。綺麗な言葉を使いましょう。')
+      expect(post.errors[:body]).to include 'にはNGワードが含まれています。綺麗な言葉を使いましょう。'
     end
   end
 end
