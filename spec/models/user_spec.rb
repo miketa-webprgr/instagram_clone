@@ -148,11 +148,11 @@ RSpec.describe User, type: :model do
           expect(User.recent(5).count).to eq 5
         end
 
-        it "5番目に新しいデータ（updated_at: '20200406'）が含まれる" do
+        it "5番目に新しいデータ（created_at: '20200406'）が含まれる" do
           expect(User.recent(5)).to include User.find_by(updated_at: '20200406')
         end
 
-        it "6番目に新しいデータ（updated_at: '20200405'）が含まれない" do
+        it "6番目に新しいデータ（created_at: '20200405'）が含まれない" do
           expect(User.recent(5)).not_to include User.find_by(updated_at: '20200405')
         end
       end
