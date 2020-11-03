@@ -53,7 +53,7 @@ RSpec.describe User, type: :model do
       it '新しいuserを { username: dyson } で作成するとtrueが返る' do
         expect(build(:user, username: 'dyson').valid?).to be true
       end
-      
+
       it '新しいuserを { username: miketa } で作成するとエラーを返す' do
         miketa = build(:user, username: 'miketa')
         expect(miketa.valid?).to be false

@@ -19,23 +19,6 @@
 #
 require 'rails_helper'
 
-  # # このテストは、Railsのバリデーションのテストをしているだけなので不要？
-  # 
-  #   it '新しいuserを { username: nil, email: test@example.com } で作成するとfalseが返る' do
-  #     expect(build(:user, username: nil, email: 'test@example.com').valid?).to be_falsey
-  #   end
-  #   it '新しいuserを { username: '', email: test@example.com } で作成するとfalseが返る' do
-  #     expect(build(:user, username: '', email: 'test@example.com').valid?).to be_falsey
-  #   end
-  #   it '新しいuserを { email: nil } で作成するとfalseが返る' do
-  #     expect(build(:user, email: nil).valid?).to be_falsey
-  #   end
-  #   it '新しいuserを { emai: '' } で作成するとfalseが返る' do
-  #     expect(build(:user, email: '').valid?).to be_falsey
-  #   end
-  # end
-
-
 RSpec.describe Post, type: :model do
   describe 'scopeのbody_containメソッド' do
     before do
