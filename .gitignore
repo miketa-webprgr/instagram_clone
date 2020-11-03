@@ -138,6 +138,9 @@ Temporary Items
 # RSpec用（画像）
 /spec/support
 
+# simplecov
+/coverage/*
+
 # dump.rdb（redisのdbファイル）
 dump.rdb
 
