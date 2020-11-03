@@ -62,6 +62,9 @@ group :development, :test do
   gem 'rspec-rails'
   # bin/rspecを使うために導入した
   gem 'spring-commands-rspec'
+  # RSpecのデバッグにも使用するため
+  gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -73,11 +76,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   # 今回導入するgem
-  gem 'rubocop'
-  gem 'rubocop-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'pry-byebug'
-  gem 'pry-rails'
   gem 'letter_opener_web'
 end
