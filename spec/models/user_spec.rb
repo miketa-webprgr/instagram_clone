@@ -149,11 +149,11 @@ RSpec.describe User, type: :model do
         end
 
         it "5番目に新しいデータ（updated_at: '20200406'）が含まれる" do
-          expect(User.recent(5).include?(User.find_by(updated_at: '20200406'))).to be true
+          expect(User.recent(5)).to include User.find_by(updated_at: '20200406')
         end
 
         it "6番目に新しいデータ（updated_at: '20200405'）が含まれない" do
-          expect(User.recent(5).include?(User.find_by(updated_at: '20200405'))).to be false
+          expect(User.recent(5)).not_to include User.find_by(updated_at: '20200405')
         end
       end
 
@@ -189,7 +189,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'user1.like(user2_post)をすると、user1.likesにuser2のpostが含まれる' do
-      expect(user1.like(user2_post))).include user2_post
+      expect(user1.like(user2_post)).to include user2_post
     end
 
     it 'user1.like(user2_post)を２回すると、エラーになる' do
@@ -244,7 +244,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'user1.follow(user2)をすると、user1.followingにuser2が含まれる' do
-      expect(user1.follow(user2).include?(user2)).to be true
+      expect(user1.follow(user2)).to include user2
     end
   end
 
@@ -283,15 +283,15 @@ RSpec.describe User, type: :model do
       let(:user3) { create(:user, username: 'user3') }
       
       it 'user1.feedにuser1のpostが含まれている' do
-        expect(user1.feed.include?(user1_post)).to be true
+        expect(user1.feed).to include user1_post
       end
 
       it 'user1.feedにuser2のpostが含まれている' do
-        expect(user1.feed.include?(user2_post)).to be true
+        expect(user1.feed).to include user2_post
       end
 
       it 'user1.feedにuser3のpostが含まれていない' do
-        expect(user1.feed.include?(user3_post)).to be false
+        expect(user1.feed).not_to include user3_post
       end
 
       it 'さらにuser2のpostを作った場合、use1.feedの数は3つである' do
