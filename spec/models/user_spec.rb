@@ -235,12 +235,8 @@ RSpec.describe User, type: :model do
       expect { user1.follow(user2) }.to change { user1.following.size }.by(1)
     end
 
-    xit 'user1.follow(user2)をすると、user2.followersの数が1つ増えている' do # なぜか分からないけど、うまくいかない
-      expect { user1.follow(user2) }.to change { user2.followers.size }.by(1)
-    end
-
-    xit 'user1.follow(user2)をすると、user2.followersの数が1つ増えている' do # これもうまくいかない
-      expect { user1.follow(user2) }.to change { user2.passive_relationships.size }.by(1)
+    it 'user1.follow(user2)をすると、user2.followersの数が1つ増えている' do
+      expect { user1.follow(user2) }.to change { user2.reload.followers.size }.by(1)
     end
 
     it 'user1.follow(user2)をすると、user1.followingにuser2が含まれる' do
