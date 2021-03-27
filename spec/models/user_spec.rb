@@ -149,11 +149,11 @@ RSpec.describe User, type: :model do
         end
 
         it "5番目に新しいデータ（created_at: '20200406'）が含まれる" do
-          expect(User.recent(5)).to include User.find_by(updated_at: '20200406')
+          expect(User.recent(5)).to include User.find_by(updated_at: Time.zone.parse('20200406'))
         end
 
         it "6番目に新しいデータ（created_at: '20200405'）が含まれない" do
-          expect(User.recent(5)).not_to include User.find_by(updated_at: '20200405')
+          expect(User.recent(5)).not_to include User.find_by(updated_at: Time.zone.parse('20200405'))
         end
       end
 
@@ -277,7 +277,7 @@ RSpec.describe User, type: :model do
     context 'user1がuser3をフォローしていない場合' do
       let!(:user3_post) { create(:post, user: user3) }
       let(:user3) { create(:user, username: 'user3') }
-      
+
       it 'user1.feedにuser1のpostが含まれている' do
         expect(user1.feed).to include user1_post
       end
