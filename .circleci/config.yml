@@ -12,8 +12,11 @@ jobs: # 一連のステップ
       - image: redis:latest
       - image: circleci/mysql:5.7 # データベース イメージ
         environment: # データベースの環境変数
-          MYSQL_USER: root
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          # よく分からないが、試しに書き換えてみた
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
     steps: # 実行可能コマンドの集合
       - checkout # ソース コードを作業ディレクトリにチェックアウトする特別なステップ
 
