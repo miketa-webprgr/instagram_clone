@@ -4,7 +4,7 @@
 #
 #  id              :bigint           not null, primary key
 #  notifiable_type :string(255)
-#  read            :boolean          default(FALSE), not null
+#  read            :boolean          default("unread"), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  notifiable_id   :bigint

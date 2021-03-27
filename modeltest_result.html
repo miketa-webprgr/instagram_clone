@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+
+function addClass(element_id, classname) {
+  document.getElementById(element_id).className += (" " + classname);
+}
+
+function removeClass(element_id, classname) {
+  var elem = document.getElementById(element_id);
+  var classlist = elem.className.replace(classname,'');
+  elem.className = classlist;
+}
+
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+
+function makeRed(element_id) {
+  removeClass(element_id, 'passed');
+  removeClass(element_id, 'not_implemented');
+  addClass(element_id,'failed');
+}
+
+function makeYellow(element_id) {
+  var elem = document.getElementById(element_id);
+  if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+    if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+      removeClass(element_id, 'passed');
+      addClass(element_id,'not_implemented');
+    }
+  }
+}
+
+function apply_filters() {
+  var passed_filter = document.getElementById('passed_checkbox').checked;
+  var failed_filter = document.getElementById('failed_checkbox').checked;
+  var pending_filter = document.getElementById('pending_checkbox').checked;
+
+  assign_display_style("example passed", passed_filter);
+  assign_display_style("example failed", failed_filter);
+  assign_display_style("example not_implemented", pending_filter);
+
+  assign_display_style_for_group("example_group passed", passed_filter);
+  assign_display_style_for_group("example_group not_implemented", pending_filter, pending_filter || passed_filter);
+  assign_display_style_for_group("example_group failed", failed_filter, failed_filter || pending_filter || passed_filter);
+}
+
+function get_display_style(display_flag) {
+  var style_mode = 'none';
+  if (display_flag == true) {
+    style_mode = 'block';
+  }
+  return style_mode;
+}
+
+function assign_display_style(classname, display_flag) {
+  var style_mode = get_display_style(display_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    elems[i].style.display = style_mode;
+  }
+}
+
+function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+  var display_style_mode = get_display_style(display_flag);
+  var subgroup_style_mode = get_display_style(subgroup_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    var style_mode = display_style_mode;
+    if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+      elems[i].style.display = subgroup_style_mode;
+    } else {
+      elems[i].style.display = display_style_mode;
+    }
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#label {
+  float:left;
+}
+
+#display-filters {
+  float:left;
+  padding: 28px 0 0 40%;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+}
+
+#summary {
+  float:right;
+  padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+dd .duration {
+  padding-left: 5px;
+  text-align: right;
+  right: 0px;
+  float:right;
+}
+
+dd.example.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.example.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.example.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+dd.example.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+
+dt.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+dt.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+dt.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+#rspec-header.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+#rspec-header.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+#rspec-header.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="display-filters">
+    <input id="passed_checkbox"  name="passed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="1" /> <label for="passed_checkbox">Passed</label>
+    <input id="failed_checkbox"  name="failed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="2" /> <label for="failed_checkbox">Failed</label>
+    <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="3" /> <label for="pending_checkbox">Pending</label>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&#160;</p>
+    <p id="duration">&#160;</p>
+  </div>
+</div>
+
+
+<div class="results">
+<div id="div_group_1" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_1" class="passed">Post</dt>
+  </dl>
+</div>
+<div id="div_group_2" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_2" class="passed">scopeのbody_containメソッド</dt>
+    <script type="text/javascript">moveProgressBar('2.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Post.body_contain(miketa)をすると、２つのpostsを返す</span><span class='duration'>0.48750s</span></dd>
+    <script type="text/javascript">moveProgressBar('4.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">Post.body_contain(handsome)をすると、１つのpostsを返す</span><span class='duration'>0.10073s</span></dd>
+    <script type="text/javascript">moveProgressBar('6.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">Post.body_contain(dyson)をすると、postsを返さない</span><span class='duration'>0.15563s</span></dd>
+  </dl>
+</div>
+<div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_3" class="passed">validation（presence確認）</dt>
+    <script type="text/javascript">moveProgressBar('8.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいpostを作成するとtrueが返る</span><span class='duration'>0.01941s</span></dd>
+    <script type="text/javascript">moveProgressBar('10.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいpostを { body: nil } で作成するとエラーを返す</span><span class='duration'>0.79557s</span></dd>
+    <script type="text/javascript">moveProgressBar('12.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいpostを { body:  } で作成するとエラーを返す</span><span class='duration'>0.01481s</span></dd>
+    <script type="text/javascript">moveProgressBar('14.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいpostを { images: nil } で作成するとエラーを返す</span><span class='duration'>0.00399s</span></dd>
+    <script type="text/javascript">moveProgressBar('16.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいpostを { images:  } で作成するとエラーを返す</span><span class='duration'>0.00268s</span></dd>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_4" class="passed">validation（ length 1,000文字 ）</dt>
+    <script type="text/javascript">moveProgressBar('18.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいpostを1,001字で作成するとfalseが返る</span><span class='duration'>0.01207s</span></dd>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_5" class="passed">validation（NgWordsValidator）</dt>
+    <script type="text/javascript">moveProgressBar('20.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいpostを { body: いいぞ } で作成するとtrueが返る</span><span class='duration'>0.02062s</span></dd>
+    <script type="text/javascript">moveProgressBar('22.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいpostを { body: おっぱいいっぱい、ゆめいっぱい！} で作成すると専用のエラーメッセージが表示される</span><span class='duration'>0.01420s</span></dd>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_6" class="passed">User</dt>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_7" class="passed">validation（一意性）</dt>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_8" class="passed">username: miketaであるuserがいる場合</dt>
+    <script type="text/javascript">moveProgressBar('25.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { username: dyson } で作成するとtrueが返る</span><span class='duration'>0.02960s</span></dd>
+    <script type="text/javascript">moveProgressBar('27.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { username: miketa } で作成するとエラーを返す</span><span class='duration'>0.04581s</span></dd>
+    <script type="text/javascript">moveProgressBar('29.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { username: taishiro, email: mikemike@example.com }で作成するとエラーを返す</span><span class='duration'>0.05240s</span></dd>
+  </dl>
+</div>
+<div id="div_group_9" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_9" class="passed">validation（presence確認）</dt>
+    <script type="text/javascript">moveProgressBar('31.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { username: nil, email: test@example.com } で作成するとエラーを返す</span><span class='duration'>0.01335s</span></dd>
+    <script type="text/javascript">moveProgressBar('33.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { username: , email: test@example.com } で作成するとエラーを返す</span><span class='duration'>0.00857s</span></dd>
+    <script type="text/javascript">moveProgressBar('35.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { email: nil } で作成するとエラーを返す</span><span class='duration'>0.00675s</span></dd>
+    <script type="text/javascript">moveProgressBar('37.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { emai:  } で作成するとエラーを返す</span><span class='duration'>0.00762s</span></dd>
+  </dl>
+</div>
+<div id="div_group_10" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_10" class="passed">validation（sorceryのパスワード関連）</dt>
+  </dl>
+</div>
+<div id="div_group_11" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_11" class="passed">new_recordを生成した時</dt>
+    <script type="text/javascript">moveProgressBar('39.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { password: 123, password_confirmation: 123 } で作成するとtrueが返る</span><span class='duration'>0.00616s</span></dd>
+    <script type="text/javascript">moveProgressBar('41.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { password: 12, password_confirmation: 12 } で作成するとエラーを返す</span><span class='duration'>0.00764s</span></dd>
+    <script type="text/javascript">moveProgressBar('43.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">新しいuserを { password: 123, password_confirmation: 456 } で作成するとエラーを返す</span><span class='duration'>0.00729s</span></dd>
+  </dl>
+</div>
+<div id="div_group_12" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_12" class="passed">changes[:crypted_password]がtrueの時</dt>
+    <script type="text/javascript">moveProgressBar('45.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">userを { password: 123, password_confirmation: 123 } で更新できる</span><span class='duration'>0.02828s</span></dd>
+    <script type="text/javascript">moveProgressBar('47.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">userを { password: 12, password_confirmation: 12 } で更新できない</span><span class='duration'>0.01951s</span></dd>
+    <script type="text/javascript">moveProgressBar('50.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">userを { password: 123, password_confirmation: 456 } で更新できない</span><span class='duration'>0.01810s</span></dd>
+  </dl>
+</div>
+<div id="div_group_13" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_13" class="passed">scopeのrecentメソッド</dt>
+  </dl>
+</div>
+<div id="div_group_14" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_14" class="passed">2020年4月1日から10日まで、毎日userを１人ずつ作成した場合</dt>
+  </dl>
+</div>
+<div id="div_group_15" class="example_group passed">
+  <dl style="margin-left: 45px;">
+  <dt id="example_group_15" class="passed">recent(5)</dt>
+    <script type="text/javascript">moveProgressBar('52.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">取得するユーザー数が5人である</span><span class='duration'>0.09264s</span></dd>
+    <script type="text/javascript">moveProgressBar('54.1');</script>
+    <dd class="example passed"><span class="passed_spec_name">5番目に新しいデータ（created_at: &#39;20200406&#39;）が含まれる</span><span class='duration'>0.13479s</span></dd>
+    <script type="text/javascript">moveProgressBar('56.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">6番目に新しいデータ（created_at: &#39;20200405&#39;）が含まれない</span><span class='duration'>0.12519s</span></dd>
+  </dl>
+</div>
+<div id="div_group_16" class="example_group passed">
+  <dl style="margin-left: 45px;">
+  <dt id="example_group_16" class="passed">recent(11)</dt>
+    <script type="text/javascript">moveProgressBar('58.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">取得するユーザー数が10人である</span><span class='duration'>0.10904s</span></dd>
+  </dl>
+</div>
+<div id="div_group_17" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_17" class="passed">own?</dt>
+    <script type="text/javascript">moveProgressBar('60.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1_postに対して、user1.own?を実行するとtrueが返る</span><span class='duration'>0.07101s</span></dd>
+    <script type="text/javascript">moveProgressBar('62.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">user2_postに対して、user1.own?を実行するとエラーを返す</span><span class='duration'>0.10735s</span></dd>
+  </dl>
+</div>
+<div id="div_group_18" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_18" class="passed">like</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_18');</script>
+    <script type="text/javascript">makeYellow('example_group_18');</script>
+    <script type="text/javascript">moveProgressBar('64.5');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">user1.like(user1_post)をすると、falseが返ってくる (PENDING: Temporarily skipped with xit)</span></dd>
+    <script type="text/javascript">moveProgressBar('66.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.like(user2_post)をすると、user1.likesの数が1つ増える</span><span class='duration'>0.38852s</span></dd>
+    <script type="text/javascript">moveProgressBar('68.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.like(user2_post)をすると、user1.likesにuser2のpostが含まれる</span><span class='duration'>0.15559s</span></dd>
+    <script type="text/javascript">moveProgressBar('70.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.like(user2_post)を２回すると、エラーになる</span><span class='duration'>0.16682s</span></dd>
+  </dl>
+</div>
+<div id="div_group_19" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_19" class="passed">like?</dt>
+  </dl>
+</div>
+<div id="div_group_20" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_20" class="passed">user1がuser2のsecond_postをいいねしていない場合</dt>
+    <script type="text/javascript">moveProgressBar('72.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.like?(user2のpost)をするとtrueが返る</span><span class='duration'>0.15644s</span></dd>
+    <script type="text/javascript">moveProgressBar('75.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.like?(user2_second_post)をするとfalseが返る</span><span class='duration'>0.26004s</span></dd>
+  </dl>
+</div>
+<div id="div_group_21" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_21" class="passed">unlike</dt>
+    <script type="text/javascript">moveProgressBar('77.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.unlike(user2のpost)をすると、user1.likesの数が1つ減る</span><span class='duration'>0.30401s</span></dd>
+  </dl>
+</div>
+<div id="div_group_22" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_22" class="passed">follow</dt>
+    <script type="text/javascript">makeYellow('rspec-header');</script>
+    <script type="text/javascript">makeYellow('div_group_22');</script>
+    <script type="text/javascript">makeYellow('example_group_22');</script>
+    <script type="text/javascript">moveProgressBar('79.1');</script>
+    <dd class="example not_implemented"><span class="not_implemented_spec_name">user1.follow(user1)をすると、nilが返ってくる (PENDING: Temporarily skipped with xit)</span></dd>
+    <script type="text/javascript">moveProgressBar('81.2');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.follow(user2)をすると、user1.followingの数が1つ増えている</span><span class='duration'>0.12369s</span></dd>
+    <script type="text/javascript">moveProgressBar('83.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.follow(user2)をすると、user2.followersの数が1つ増えている</span><span class='duration'>0.14932s</span></dd>
+    <script type="text/javascript">moveProgressBar('85.4');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.follow(user2)をすると、user1.followingにuser2が含まれる</span><span class='duration'>0.06624s</span></dd>
+  </dl>
+</div>
+<div id="div_group_23" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_23" class="passed">following?</dt>
+  </dl>
+</div>
+<div id="div_group_24" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_24" class="passed">user1がuser3をフォローしていない場合</dt>
+    <script type="text/javascript">moveProgressBar('87.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.following?(user2)をするとtrueが返る</span><span class='duration'>0.06977s</span></dd>
+    <script type="text/javascript">moveProgressBar('89.5');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.following?(user3)をするとfalseが返る</span><span class='duration'>0.06108s</span></dd>
+  </dl>
+</div>
+<div id="div_group_25" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_25" class="passed">unfollow</dt>
+    <script type="text/javascript">moveProgressBar('91.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.unfollow(user2)をすると、user1.followingの数が1つ減る</span><span class='duration'>0.05822s</span></dd>
+  </dl>
+</div>
+<div id="div_group_26" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_26" class="passed">feed</dt>
+  </dl>
+</div>
+<div id="div_group_27" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_27" class="passed">user1がuser3をフォローしていない場合</dt>
+    <script type="text/javascript">moveProgressBar('93.7');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.feedにuser1のpostが含まれている</span><span class='duration'>0.13936s</span></dd>
+    <script type="text/javascript">moveProgressBar('95.8');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.feedにuser2のpostが含まれている</span><span class='duration'>0.13870s</span></dd>
+    <script type="text/javascript">moveProgressBar('97.9');</script>
+    <dd class="example passed"><span class="passed_spec_name">user1.feedにuser3のpostが含まれていない</span><span class='duration'>0.16364s</span></dd>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">さらにuser2のpostを作った場合、use1.feedの数は3つである</span><span class='duration'>0.19287s</span></dd>
+  </dl>
+</div>
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>5.14970 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "48 examples, 0 failures, 2 pending";</script>
+</div>
+</div>
+</body>
+</html>

@@ -50,8 +50,21 @@ module InstaClone
     # generateコマンド時に生成されるファイルに制限をかける
     config.generators do |g|
       g.assets false # CSS, JSが自動生成されない
-      g.test_framework false # Minitestが自動生成されない
       g.skip_routes true # ルーティングが自動生成されない
+      # RSpec generatorを使った際に怒られたので、テストでRSpecを使う設定に切り替えた
+      # ModelとSystemスペック以外は使わないので、以下のような設定にした
+      # （参考）test_frameworkがfalseのままだと、factoryファイルが自動生成されなかった
+      g.test_framework :rspec,
+        view_specs: false,
+        helper_specs: false,
+        controller_specs: false,
+        routing_specs: false,
+        request_specs: false
     end
+
+    # FactoryBotを自動生成したくない場合、以下のように設定する
+    # config.generators do |g|
+    #   g.factory_bot false
+    # end
   end
 end

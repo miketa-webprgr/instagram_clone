@@ -58,6 +58,17 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  # bin/rspecを使うために導入した
+  gem 'spring-commands-rspec'
+  # RSpecのデバッグにも使用するため
+  gem 'pry-byebug'
+  gem 'pry-rails'
+end
+
+group :test do
+  gem 'simplecov', require: false, group: :test
 end
 
 group :development do
@@ -69,11 +80,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 
   # 今回導入するgem
-  gem 'rubocop'
-  gem 'rubocop-rails'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'pry-byebug'
-  gem 'pry-rails'
   gem 'letter_opener_web'
 end
