@@ -69,6 +69,7 @@ end
 
 group :test do
   gem 'simplecov', require: false, group: :test
+  gem 'rspec_junit_formatter'
 end
 
 group :development do
