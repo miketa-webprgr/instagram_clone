@@ -135,9 +135,6 @@ Temporary Items
 # シードファイル（画像）
 /public/uploads
 
-# RSpec用（画像）
-/spec/support
-
 # simplecov
 /coverage/*
 
